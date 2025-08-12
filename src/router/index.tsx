@@ -82,11 +82,6 @@ function Router() {
       children: [
         {
           index: true,
-          element: <Navigate to="/" replace />,
-        },
-
-        {
-          path: "/",
           element: <LandingPage />,
         },
         {
@@ -102,9 +97,9 @@ function Router() {
           element: <GrantPage />,
         },
         {
-          path: '/booking',
-          element: <BookingPage />
-        }
+          path: "/booking",
+          element: <BookingPage />,
+        },
       ],
     },
     // {

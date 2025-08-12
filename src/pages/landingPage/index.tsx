@@ -1,8 +1,11 @@
-
-const  LandingPage = () => {
+const LandingPage = () => {
   return (
-    <div>LandingPage</div>
-  )
-}
+    <div>
+      LandingPage LandingPage LandingPage LandingPage LandingPage LandingPage
+      LandingPage LandingPage LandingPage LandingPage LandingPage LandingPage
+      LandingPage LandingPage LandingPage LandingPage LandingPage LandingPage
+    </div>
+  );
+};
 
-export default LandingPage
+export default LandingPage;
