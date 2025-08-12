@@ -60,6 +60,7 @@ module.exports = {
       },
       container: {
         center: true,
+        padding: '6rem',
       },
       maxWidth: {
         "1/4": "25%",

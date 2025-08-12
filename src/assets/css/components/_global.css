@@ -1,4 +1,4 @@
-html {
+/* html {
   scroll-behavior: smooth;
   background-color: theme("colors.primary");
   &.dark {
@@ -28,4 +28,4 @@ html {
       padding-right: theme("spacing.8");
     }
   }
-}
+} */

@@ -73,6 +73,7 @@ import RecognizeABusinessPage from "../pages/nominationPage/index";
 import ContactUsPage from "../pages/contactPage/index";
 import GrantPage from "../pages/grantPage/index";
 import BookingPage from "../pages/bookingPage/index";
+import BoothRegisterationPage from "../pages/boothRegistration";
 
 function Router() {
   const routes = [
@@ -104,6 +105,10 @@ function Router() {
         {
           path: '/booking',
           element: <BookingPage />
+        },
+        {
+          path: '/booth-registration',
+          element: <BoothRegisterationPage />
         }
       ],
     },
@@ -403,5 +408,5 @@ function Router() {
 export default Router;
 
 function PublicLayout() {
-  return <Outlet />;
+  return <Outlet />
 }
