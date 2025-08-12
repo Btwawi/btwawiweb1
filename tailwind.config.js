@@ -28,6 +28,18 @@ module.exports = {
         danger: "rgb(var(--color-danger) / <alpha-value>)",
         light: "rgb(var(--color-light) / <alpha-value>)",
         dark: "rgb(var(--color-dark) / <alpha-value>)",
+        prussianBlue: "#002D62",
+        primaryGreen: "#4CAF50",
+        primaryGray: "#0D141C",
+        lightYellowBase: "#EDC645",
+        lightGray: "#656565",
+        lightGray100: "#C6C6C6",
+        lightBlue: "#CFDBE8",
+        neutralGray: "#6e7368",
+        neutralWhite: "#ffffff",
+        neutralBlue: "#F2F8FF",
+        darkPrimary: "#022723",
+        darkSecondary: "#011311",
         darkmode: {
           50: "rgb(var(--color-darkmode-50) / <alpha-value>)",
           100: "rgb(var(--color-darkmode-100) / <alpha-value>)",
@@ -43,6 +55,8 @@ module.exports = {
       },
       fontFamily: {
         roboto: ["Roboto"],
+        wix: ["Wix Madefor Display", "sans-serif"],
+        aeonik: ["Aeonik", "sans-serif"],
       },
       container: {
         center: true,
@@ -122,17 +136,17 @@ module.exports = {
     plugin(function ({ addBase, matchUtilities }) {
       addBase({
         // Default colors
-        ":root": {
-          "--color-primary": toRGB(colors.blue["900"]),
-          "--color-secondary": toRGB(colors.slate["200"]),
-          "--color-success": toRGB(colors.teal["600"]),
-          "--color-info": toRGB(colors.cyan["500"]),
-          "--color-warning": toRGB(colors.amber["500"]),
-          "--color-pending": toRGB(colors.orange["500"]),
-          "--color-danger": toRGB(colors.red["700"]),
-          "--color-light": toRGB(colors.slate["100"]),
-          "--color-dark": toRGB(colors.slate["800"]),
-        },
+        // ":root": {
+        //   "--color-primary": toRGB(colors.blue["900"]),
+        //   "--color-secondary": toRGB(colors.slate["200"]),
+        //   "--color-success": toRGB(colors.teal["600"]),
+        //   "--color-info": toRGB(colors.cyan["500"]),
+        //   "--color-warning": toRGB(colors.amber["500"]),
+        //   "--color-pending": toRGB(colors.orange["500"]),
+        //   "--color-danger": toRGB(colors.red["700"]),
+        //   "--color-light": toRGB(colors.slate["100"]),
+        //   "--color-dark": toRGB(colors.slate["800"]),
+        // },
         // Default dark-mode colors
         ".dark": {
           "--color-primary": toRGB(colors.blue["800"]),
