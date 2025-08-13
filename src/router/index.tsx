@@ -73,6 +73,9 @@ import RecognizeABusinessPage from "../pages/nominationPage/index";
 import ContactUsPage from "../pages/contactPage/index";
 import GrantPage from "../pages/grantPage/index";
 import BookingPage from "../pages/bookingPage/index";
+import Lagos from "../pages/Lagos";
+import Abuja from "../pages/Abuja";
+import Blog from "../pages/Blog";
 
 function Router() {
   const routes = [
@@ -99,6 +102,18 @@ function Router() {
         {
           path: "/booking",
           element: <BookingPage />,
+        },
+        {
+          path: "/conference-lagos",
+          element: <Lagos />,
+        },
+        {
+          path: "/conference-abuja",
+          element: <Abuja />,
+        },
+        {
+          path: "/our-blog",
+          element: <Blog />,
         },
       ],
     },
