@@ -5,6 +5,8 @@ import { WhyAttendSection } from "../assets/css/components/WhyAttendSection";
 import { SpeakersSection } from "../assets/css/components/SpeakersSection";
 import { RegistrationCTA } from "../assets/css/components/RegistrationCTA";
 import { SupportPartnerSections } from "../assets/css/components/SupportPartnerSections";
+import Header from "../components/Layout/Header";
+import Footer from "../components/Layout/Footer";
 
 const lagosData = {
   hero: {
@@ -92,13 +94,16 @@ const lagosData = {
 
 export default function Lagos() {
   return (
-    <div className="pt-[141px]">
-      <HeroSection data={lagosData.hero} />
+    <div>
+      <Header />
+      {/* @ts-ignore */}
+      <HeroSection data={lagosData.hero} className="mt-[-241px] relative" />
       <StatsSection data={lagosData.stats} />
       <WhyAttendSection data={lagosData.whyAttend} />
       <SpeakersSection data={lagosData.speakers} />
       <RegistrationCTA />
       <SupportPartnerSections />
+      <Footer />
     </div>
   );
 }

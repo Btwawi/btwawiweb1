@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface HeroData {
   label: string;
@@ -6,6 +6,7 @@ interface HeroData {
   subtitle: string;
   backgroundImage: string;
   date: string;
+  className?: string;
 }
 
 interface HeroSectionProps {
@@ -13,24 +14,25 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ data }: HeroSectionProps) {
-  const [cityName, version] = data.label.split(' ');
+  const [cityName, version] = data.label.split(" ");
 
   return (
     <section className="relative h-[100vh] min-h-[800px] w-full overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{
-          backgroundImage: `url('${data.backgroundImage}')`
+          backgroundImage: `url('${data.backgroundImage}')`,
         }}
       />
-      
+
       {/* Content Container */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
         {/* City Label */}
         <div className="mb-4 md:mb-8">
           <h1 className="text-btwawi-blue font-aeonik text-vw-2xl md:text-vw-3xl italic font-normal tracking-[3.82px] uppercase">
-            <span className="font-bold">{cityName}</span> <span className="font-normal">{version}</span>
+            <span className="font-bold">{cityName}</span>{" "}
+            <span className="font-normal">{version}</span>
           </h1>
         </div>
 
