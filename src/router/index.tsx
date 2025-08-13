@@ -68,43 +68,74 @@ import CollaborationMain from "../pages/Collaborations";
 import CollaborationForm from "../pages/CollaborationsForm";
 import Login from "../pages/Public/Login";
 import ProfilePreview from "../pages/UpdateProfile";
+import LandingPage from "../pages/landingPage/index";
+import RecognizeABusinessPage from "../pages/nominationPage/index";
+import ContactUsPage from "../pages/contactPage/index";
+import GrantPage from "../pages/grantPage/index";
+import BookingPage from "../pages/bookingPage/index";
 
 function Router() {
   const routes = [
     {
-      path: "/auth",
+      path: "/",
       element: <PublicLayout />,
       children: [
         {
           index: true,
-          element: <Navigate to="/auth/login" replace />,
+          element: <LandingPage />,
         },
         {
-          path: "/auth/login",
-          element: <Login />,
+          path: "/recognize-a-business",
+          element: <RecognizeABusinessPage />,
         },
         {
-          path: "/auth/register",
-          element: <Register />,
+          path: "/contact-us",
+          element: <ContactUsPage />,
         },
         {
-          path: "/auth/forget-password",
-          element: <ForgetPassword />,
+          path: "/grant",
+          element: <GrantPage />,
         },
         {
-          path: "/auth/verify-otp",
-          element: <VerifyOtp />,
-        },
-        {
-          path: "/auth/reset-password",
-          element: <ResetPassword />,
-        },
-        {
-          path: "auth/change-password",
-          element: <ChangePassword />,
+          path: "/booking",
+          element: <BookingPage />,
         },
       ],
     },
+    // {
+    //   path: "/auth",
+    //   element: <PublicLayout />,
+    //   children: [
+    //     {
+    //       index: true,
+    //       element: <Navigate to="/auth/login" replace />,
+    //     },
+    //     {
+    //       path: "/auth/login",
+    //       element: <Login />,
+    //     },
+    //     {
+    //       path: "/auth/register",
+    //       element: <Register />,
+    //     },
+    //     {
+    //       path: "/auth/forget-password",
+    //       element: <ForgetPassword />,
+    //     },
+    //     {
+    //       path: "/auth/verify-otp",
+    //       element: <VerifyOtp />,
+    //     },
+    //     {
+    //       path: "/auth/reset-password",
+    //       element: <ResetPassword />,
+    //     },
+    //     {
+    //       path: "auth/change-password",
+    //       element: <ChangePassword />,
+    //     },
+    //   ],
+    // },
     {
       path: "/",
       element: (

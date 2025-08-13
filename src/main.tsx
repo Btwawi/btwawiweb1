@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store}>
       <Router />
-      <Toaster position="top-right" />;
+      <Toaster position="top-right" />
     </Provider>
     <ScrollToTop />
   </BrowserRouter>
