@@ -73,6 +73,7 @@ import RecognizeABusinessPage from "../pages/nominationPage/index";
 import ContactUsPage from "../pages/contactPage/index";
 import GrantPage from "../pages/grantPage/index";
 import BookingPage from "../pages/bookingPage/index";
+import BoothRegisterationPage from "../pages/boothRegistration";
 import Lagos from "../pages/Lagos";
 import Abuja from "../pages/Abuja";
 import Blog from "../pages/Blog";
@@ -100,6 +101,14 @@ function Router() {
           element: <GrantPage />,
         },
         {
+          path: '/booking',
+          element: <BookingPage />
+        },
+        {
+          path: '/booth-registration',
+          element: <BoothRegisterationPage />
+        }
+=======
           path: "/booking",
           element: <BookingPage />,
         },
@@ -413,5 +422,5 @@ function Router() {
 export default Router;
 
 function PublicLayout() {
-  return <Outlet />;
+  return <Outlet />
 }
