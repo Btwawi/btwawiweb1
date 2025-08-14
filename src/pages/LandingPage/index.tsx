@@ -249,9 +249,9 @@ const LandingPage = () => {
         </div>
 
         {/* Hero Content now above overlay */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 flex items-start justify-between pb-10 w-full bg-purple-500">
+        <div className="absolute bottom-0 left-0 right-0 z-20 flex items-start justify-between pb-10 w-full">
           {/* <div className="absolute bottom-0 left-0 right-0 z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24 lg:pb-32"> */}
-          <div className="flex justify-between lg:grid-cols-2 gap-8 lg:gap-12 items-end bg-red-500 max-w-7xl mx-auto">
+          <div className="flex justify-between lg:grid-cols-2 gap-8 lg:gap-12 items-end max-w-7xl mx-auto">
             {/* First div - Conference Title */}
             <div className="text-center lg:text-left">
               <div className="mb-4">
