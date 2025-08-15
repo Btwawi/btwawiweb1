@@ -61,7 +61,7 @@ const BookingPage = () => {
     console.log(data);
     try {
       const response = await axios.post(
-        "http://localhost:5500/api/v1/register/book-seat",
+        "https://btwawi.onrender.com/api/v1/register/book-seat",
         data,
         {
           headers: {

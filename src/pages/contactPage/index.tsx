@@ -27,7 +27,7 @@ const ContactUsPage = () => {
   const onSubmit: SubmitHandler<ContactData> = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/contact/send-message",
+        "https://btwawi.onrender.com/api/v1/contact/send-message",
         data,
         {
           headers: {

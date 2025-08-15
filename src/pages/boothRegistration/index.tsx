@@ -68,7 +68,7 @@ const BoothRegistrationPage = () => {
     console.log(transformedData);
     try {
       const response = await axios.post(
-        "http://localhost:5500/api/v1/booth/secure-booth",
+        "https://btwawi.onrender.com/api/v1/booth/secure-booth",
         transformedData,
         {
           headers: {
