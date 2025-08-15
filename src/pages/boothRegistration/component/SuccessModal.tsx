@@ -78,7 +78,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
         />
         <div className="flex flex-col gap-y-2 md:gap-y-4 items-center">
           <h2 className="text-prussianBlue font-bold text-xl md:text-2xl lg:text-[2rem] leading-tight md:leading-12 text-center font-aeonik">
-            You've successfully applied for a business grant!
+            You've successfully applied for a booth!
           </h2>
         </div>
         <p className="text-center text-prussianBlue font-aeonik font-medium text-xs md:text-sm lg:text-xl leading-6 md:leading-7 lg:leading-10 max-w-[32.5625rem] px-2 md:px-0">

@@ -101,7 +101,7 @@ const GrantPage = () => {
   return (
     <>
       <Header />
-      <div className="md:container px-4 mb-0 md:mb-12">
+      <div className="md:container mt-4 md:mt-10 px-4 mb-0 md:mb-12">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">
             Apply for the BTWAWI <br /> Business Grant
@@ -266,16 +266,26 @@ const GrantPage = () => {
                       <option value="" className="text-lightGray100">
                         Select a category
                       </option>
-                        <option value="Cooked Meal">Cooked Meal</option>
-                        <option value="Beverages and Drinks">Beverages and Drinks</option>
-                        <option value="Islamic Items">Islamic Items</option>
-                        <option value="Modest Wears">Modest Wears</option>
-                        <option value="Educational Materials">Educational Materials</option>
-                        <option value="Jewelries and Accessories">Jewelries and Accessories</option>
-                        <option value="Spices/Raw food">Spices/Raw food</option>
-                        <option value="Printing Services">Printing Services</option>
-                        <option value="Consultation Firm">Consultation Firm</option>
-                        <option value="Other">Other</option>
+                      <option value="Cooked Meal">Cooked Meal</option>
+                      <option value="Beverages and Drinks">
+                        Beverages and Drinks
+                      </option>
+                      <option value="Islamic Items">Islamic Items</option>
+                      <option value="Modest Wears">Modest Wears</option>
+                      <option value="Educational Materials">
+                        Educational Materials
+                      </option>
+                      <option value="Jewelries and Accessories">
+                        Jewelries and Accessories
+                      </option>
+                      <option value="Spices/Raw food">Spices/Raw food</option>
+                      <option value="Printing Services">
+                        Printing Services
+                      </option>
+                      <option value="Consultation Firm">
+                        Consultation Firm
+                      </option>
+                      <option value="Other">Other</option>
                     </select>
                     {errors.businessCategory && (
                       <p className="text-red-500 text-sm">

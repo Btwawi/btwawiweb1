@@ -74,8 +74,8 @@ import ContactUsPage from "../pages/contactPage/index";
 import GrantPage from "../pages/grantPage/index";
 import BookingPage from "../pages/bookingPage/index";
 import BoothRegisterationPage from "../pages/boothRegistration";
-import Lagos from "../pages/Lagos";
-import Abuja from "../pages/Abuja";
+import LagosPage from "../pages/LagosPage";
+import AbujaPage from "../pages/AbujaPage/index";
 import Blog from "../pages/Blog";
 
 function Router() {
@@ -107,18 +107,18 @@ function Router() {
         {
           path: '/booth-registration',
           element: <BoothRegisterationPage />
-        }
-=======
+        },
+        {
           path: "/booking",
           element: <BookingPage />,
         },
         {
           path: "/conference-lagos",
-          element: <Lagos />,
+          element: <LagosPage />,
         },
         {
           path: "/conference-abuja",
-          element: <Abuja />,
+          element: <AbujaPage />,
         },
         {
           path: "/our-blog",

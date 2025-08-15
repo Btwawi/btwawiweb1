@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SuccessModal from "./component/SuccessModal";
 import { useSnackbar } from "notistack";
+import { RiInstagramFill, RiFacebookFill, RiTwitterXFill } from "react-icons/ri";
 
 interface BoothRegistrationFormData extends FieldValues {
   email: string;
@@ -16,14 +17,18 @@ interface BoothRegistrationFormData extends FieldValues {
   contactPersonName: string;
   phoneNumber: string;
   website?: string;
-  socialMediaHandles: string;
+  socialMediaHandles: {
+    facebook?: string;
+    instagram?: string;
+    twitter?: string;
+  };
   pastEditionAttendance: string;
   experience?: string;
   businessCategory: string;
   businessDescription: string;
   exhibitionRequirements: string;
-  exhibitionBudget: string;
-  agreeToGuidelines: boolean;
+  willingToPay: string;
+  agreeToGuidelines: string;
 }
 
 const BoothRegistrationPage = () => {
@@ -52,11 +57,19 @@ const BoothRegistrationPage = () => {
   };
 
   const onSubmit: SubmitHandler<BoothRegistrationFormData> = async (data) => {
-    console.log(data);
+    const transformedData = {
+    ...data,
+    socialMediaHandles: [
+      { platform: 'facebook', handle: data.socialMediaHandles.facebook },
+      { platform: 'instagram', handle: data.socialMediaHandles.instagram },
+      { platform: 'twitter', handle: data.socialMediaHandles.twitter },
+    ].filter(Boolean) // Remove empty entries
+  };
+    console.log(transformedData);
     try {
       const response = await axios.post(
-        "http://localhost:5500/api/v1/booth/register",
-        data,
+        "http://localhost:5500/api/v1/booth/secure-booth",
+        transformedData,
         {
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +94,7 @@ const BoothRegistrationPage = () => {
   return (
     <>
       <Header />
-      <div className="md:container px-4 mb-0 md:mb-12">
+      <div className="md:container mt-4 md:mt-10 px-4 mb-0 md:mb-12">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">
             Secure your booth <br /> at BTWAWI Conference
@@ -252,22 +265,57 @@ const BoothRegistrationPage = () => {
                   </div>
 
                   {/* Social Media Handles */}
+                  {/* Social Media Handles */}
                   <div className="flex flex-col gap-1 w-full md:w-1/2">
-                    <label
-                      htmlFor="socialMediaHandles"
-                      className="text-base md:text-xl text-left text-primaryGray"
-                    >
-                      Social Media Handles (required)
+                    <label className="text-base md:text-xl text-left text-primaryGray">
+                      Social Media Handles (at least one required)
                     </label>
-                    <input
-                      id="socialMediaHandles"
-                      type="text"
-                      {...register("socialMediaHandles", {
-                        required: "Social media handles are required",
-                      })}
-                      className="border border-lightBlue p-3 placeholder-lightGray100 w-full rounded-lg"
-                      placeholder="Enter here"
-                    />
+
+                    <div className="flex gap-2 flex-row">
+                      {/* Facebook */}
+                      <div className="flex items-center border border-lightBlue rounded-lg w-full">
+                        <span className="px-2 text-lightGray100">
+                          <RiFacebookFill size={20} />
+                        </span>
+                        <input
+                          id="facebook"
+                          type="text"
+                          {...register("socialMediaHandles.facebook")}
+                          className="p-3 placeholder-lightGray100 w-full rounded-r-lg outline-none"
+                          placeholder="Facebook handle/URL"
+                        />
+                      </div>
+
+                      {/* Instagram */}
+                      <div className="flex items-center border border-lightBlue rounded-lg w-full">
+                        <span className="px-2 text-lightGray100">
+                          <RiInstagramFill size={20} />
+                        </span>
+                        <input
+                          id="instagram"
+                          type="text"
+                          {...register("socialMediaHandles.instagram")}
+                          className="p-3 placeholder-lightGray100 w-full rounded-r-lg outline-none"
+                          placeholder="Instagram handle/URL"
+                        />
+                      </div>
+
+                      {/* Twitter/X */}
+                      <div className="flex items-center border border-lightBlue rounded-lg w-full">
+                        <span className="px-2 text-lightGray100">
+                          <RiTwitterXFill size={20} />
+                        </span>
+                        <input
+                          id="twitter"
+                          type="text"
+                          {...register("socialMediaHandles.twitter")}
+                          className="p-3 placeholder-lightGray100 w-full rounded-r-lg outline-none"
+                          placeholder="Twitter handle/URL"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Error message */}
                     {errors.socialMediaHandles && (
                       <p className="text-red-500 text-sm">
                         {errors.socialMediaHandles.message}
@@ -298,8 +346,6 @@ const BoothRegistrationPage = () => {
                       <option value="Vendor">Vendor</option>
                       <option value="Attendee">Attendee</option>
                       <option value="Speaker">Speaker</option>
-                      <option value="Sponsor">Sponsor</option>
-                      <option value="First Time">First Time</option>
                     </select>
                     {errors.pastEditionAttendance && (
                       <p className="text-red-500 text-sm">
@@ -449,38 +495,27 @@ const BoothRegistrationPage = () => {
                   {/* Exhibition Budget */}
                   <div className="flex flex-col gap-1 w-full">
                     <label
-                      htmlFor="exhibitionBudget"
+                      htmlFor="willingToPay"
                       className="text-base md:text-xl text-left text-primaryGray"
                     >
-                      How much are you willing to pay to exhibit? (required)
+                      Are you willing to pay ₦90,000 to exhibit? (required)
                     </label>
                     <select
-                      id="exhibitionBudget"
-                      {...register("exhibitionBudget", {
+                      id="willingToPay"
+                      {...register("willingToPay", {
                         required: "Exhibition budget is required",
                       })}
                       className="border text-primaryGray border-lightBlue p-3 placeholder-lightGray100 w-full rounded-lg"
                     >
                       <option value="" className="text-lightGray100">
-                        Enter here
+                        Yes/No
                       </option>
-                      <option value="₦50,000 - ₦100,000">
-                        ₦50,000 - ₦100,000
-                      </option>
-                      <option value="₦100,000 - ₦200,000">
-                        ₦100,000 - ₦200,000
-                      </option>
-                      <option value="₦200,000 - ₦300,000">
-                        ₦200,000 - ₦300,000
-                      </option>
-                      <option value="₦300,000 - ₦500,000">
-                        ₦300,000 - ₦500,000
-                      </option>
-                      <option value="₦500,000+">₦500,000+</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
                     </select>
-                    {errors.exhibitionBudget && (
+                    {errors.willingToPay && (
                       <p className="text-red-500 text-sm">
-                        {errors.exhibitionBudget.message}
+                        {errors.willingToPay.message}
                       </p>
                     )}
                   </div>
@@ -491,6 +526,7 @@ const BoothRegistrationPage = () => {
                   <input
                     type="checkbox"
                     id="agreeToGuidelines"
+                    value="agree"
                     {...register("agreeToGuidelines", {
                       required: "You must agree to the guidelines",
                     })}
