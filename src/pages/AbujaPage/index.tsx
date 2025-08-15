@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import HeroBg from "../../assets/images/lagos-bg.png";
+import HeroBg from "../../assets/images/abuja-bg.png";
 import partners from "../../assets/images/partners.png";
 import whyYouShouldntMiss from "../../assets/images/why-you-shouldnt-miss.png";
 import LoveMoney from "../../assets/images/love-money.png";
@@ -109,29 +109,22 @@ export default function AbujaPage() {
         <Header />
         <div className="mt-8 lg:mt-16 flex flex-col gap-6 items-center text-center">
           <p className="font-semibold text-xl lg:text-3xl capitalize tracking-widest">
-            LAGOS <span className="italic font-light ">4.0</span>
+            ABUJA <span className="italic font-light ">2.0</span>
           </p>
           <p className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
-            Lagos, It's Time
-            <br />
-            for the{" "}
-            <span className="bg-lightYellowBase px-1 lg:px-1.5 inline-block">
-              4th Edition
-            </span>
+            Bringing Halal <br /> Business Conversations <br /> to the Capital
+            City
           </p>
           <p className="text-base sm:text-lg lg:text-2xl leading-relaxed">
-            After three powerful editions in Lagos, Business The Way Allaah
-            <br />
-            Wants It Initiative  is back with Lagos 4.0, the city’s most
-            impactful
-            <br />
-            faith-based business gathering.
+            After the great success of Abuja 1.0, Business The Way Allaah <br />{" "}
+            Wants It Initiative is returning to the Nation’s capital with Abuja
+            2.0.
           </p>
 
           <div className="bg-white/80 flex flex-row items-center justify-center gap-4 lg:gap-10 px-6 lg:px-12 py-4 lg:py-8">
             <img src={btwawiLogo} alt="logo" />
             <p className="text-lg sm:text-xl lg:text-3xl">
-              Sunday, <span className="font-bold">23rd November, 2025</span>
+              Saturday, <span className="font-bold">29th November, 2025</span>
             </p>
             <img src={btwawiLogo} alt="logo" />
           </div>
