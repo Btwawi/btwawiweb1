@@ -1,7 +1,9 @@
 import { Navigate, Outlet, useRoutes } from "react-router-dom";
-import SideMenu from "../layouts/SideMenu";
-import DashboardOverview1 from "../pages/DashboardOverview1";
-import Register from "../pages/Register";
+import PublicLayout from "../layouts/PublicLayout";
+import LandingPage from "../pages/LandingPage";
+import Lagos from "../pages/Lagos";
+import Abuja from "../pages/Abuja";
+import Blog from "../pages/Blog";
 import ErrorPage from "../pages/ErrorPage";
 import UpdateProfile from "../pages/UpdateProfile";
 import ChangePassword from "../pages/ChangePassword";
@@ -80,6 +82,7 @@ import Blog from "../pages/Blog";
 
 function Router() {
   const routes = [
+    // Public routes with navigation and footer
     {
       path: "/",
       element: <PublicLayout />,
@@ -87,6 +90,18 @@ function Router() {
         {
           index: true,
           element: <LandingPage />,
+        },
+        {
+          path: "/lagos",
+          element: <Lagos />,
+        },
+        {
+          path: "/abuja",
+          element: <Abuja />,
+        },
+        {
+          path: "/blog",
+          element: <Blog />,
         },
         {
           path: "/recognize-a-business",
@@ -107,8 +122,8 @@ function Router() {
         {
           path: '/booth-registration',
           element: <BoothRegisterationPage />
-        }
-=======
+        },
+        {
           path: "/booking",
           element: <BookingPage />,
         },
@@ -418,6 +433,7 @@ function Router() {
 
   return useRoutes(routes);
 }
+export default Router;
 
 export default Router;
 
