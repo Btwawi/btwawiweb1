@@ -1,4 +1,4 @@
-html {
+/* html {
   scroll-behavior: smooth;
   background-color: white; /* Changed from theme("colors.primary") to white */
   &.dark {
@@ -24,6 +24,7 @@ html {
     color: theme("colors.primary");
     background-color: white;
   }
+
 }
 
 /* Aeonik Fonts */
@@ -142,3 +143,6 @@ html {
 .animate-scroll:hover {
   animation-play-state: paused;
 }
+
+} */
+
