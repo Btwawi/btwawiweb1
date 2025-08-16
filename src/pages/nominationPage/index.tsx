@@ -43,7 +43,7 @@ const RecognizeABusinessPage = () => {
   const onSubmit: SubmitHandler<NominationFormData> = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/nominate/nominate-business",
+        "https://btwawi.onrender.com/api/v1/nominate/nominate-business",
         data,
         {
           headers: {
@@ -69,7 +69,7 @@ const RecognizeABusinessPage = () => {
   return (
     <>
       <Header />
-      <div className="md:container px-4 mb-6 md:mb-12">
+      <div className="md:container mt-4 md:mt-10 px-4 mb-6 md:mb-12">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">
             Recognize a Business <br /> That Inspires You
