@@ -296,7 +296,7 @@ export default function LagosPage() {
       <div className="md:container mx-auto px-4">
         <div className=" bg-neutralBlue py-12 px-4 md:px-12 mt-4 md:mt-10 flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/2 text-prussianBlue text-center md:text-left">
-            <h2 className="text-3xl md:text-5xl font-semibold">
+            <h2 className="text-3xl md:text-5xl font-medium ">
               Support BTWAWI
             </h2>
             <p className="mt-4 text-lg md:text-2xl leading-relaxed">
@@ -323,15 +323,15 @@ export default function LagosPage() {
       {/* Partner With Purpose Section */}
       <div className="md:container px-4">
         <div className="mb-8 sm:mb-16 lg:mb-40 bg-lightPaleYellow mt-4 md:mt-8 py-8 lg:py-12 px-4 md:px-12 flex flex-col md:flex-row items-center gap-6 lg:gap-8">
-          <div className="w-full md:w-1/2 flex justify-center order-2 md:order-1 ">
+          <div className="w-full md:w-1/2 flex justify-center order-2 md:order-1">
             <img
               src={partners}
               alt="Handshake representing partnership"
               className="w-full max-w-md bg-prussianBlue"
             />
           </div>
-          <div className="w-full md:w-1/2 text-prussianBlue space-y-4 lg:space-y-8 text-center md:text-left">
-            <h2 className="text-3xl md:text-5xl tracking-tighter font-bold">
+          <div className="w-full md:w-1/2 text-prussianBlue space-y-4 lg:space-y-8 text-center md:text-left order-1 md:order-2">
+            <h2 className="text-3xl md:text-5xl tracking-tighter font-medium">
               Partner With Purpose
             </h2>
             <p className="mt-4 text-lg md:text-2xl leading-relaxed">
