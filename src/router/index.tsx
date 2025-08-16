@@ -1,9 +1,7 @@
 import { Navigate, Outlet, useRoutes } from "react-router-dom";
-import PublicLayout from "../layouts/PublicLayout";
-import LandingPage from "../pages/LandingPage";
-import Lagos from "../pages/Lagos";
-import Abuja from "../pages/Abuja";
-import Blog from "../pages/Blog";
+import SideMenu from "../layouts/SideMenu";
+// import DashboardOverview1 from "../pages/DashboardOverview1";
+import Register from "../pages/Register";
 import ErrorPage from "../pages/ErrorPage";
 import UpdateProfile from "../pages/UpdateProfile";
 import ChangePassword from "../pages/ChangePassword";
@@ -69,8 +67,8 @@ import PartnershipForm from "../pages/PartnershipForm";
 import CollaborationMain from "../pages/Collaborations";
 import CollaborationForm from "../pages/CollaborationsForm";
 import Login from "../pages/Public/Login";
-import ProfilePreview from "../pages/UpdateProfile";
-import LandingPage from "../pages/landingPage/index";
+import ProfilePreview from "../pages/UpdateProfile/index";
+import LandingPage from "../pages/LandingPage/index";
 import RecognizeABusinessPage from "../pages/nominationPage/index";
 import ContactUsPage from "../pages/contactPage/index";
 import GrantPage from "../pages/grantPage/index";
@@ -82,7 +80,6 @@ import Blog from "../pages/Blog";
 
 function Router() {
   const routes = [
-    // Public routes with navigation and footer
     {
       path: "/",
       element: <PublicLayout />,
@@ -90,18 +87,6 @@ function Router() {
         {
           index: true,
           element: <LandingPage />,
-        },
-        {
-          path: "/lagos",
-          element: <Lagos />,
-        },
-        {
-          path: "/abuja",
-          element: <Abuja />,
-        },
-        {
-          path: "/blog",
-          element: <Blog />,
         },
         {
           path: "/recognize-a-business",
@@ -116,12 +101,12 @@ function Router() {
           element: <GrantPage />,
         },
         {
-          path: '/booking',
-          element: <BookingPage />
+          path: "/booking",
+          element: <BookingPage />,
         },
         {
-          path: '/booth-registration',
-          element: <BoothRegisterationPage />
+          path: "/booth-registration",
+          element: <BoothRegisterationPage />,
         },
         {
           path: "/booking",
@@ -183,10 +168,6 @@ function Router() {
         </ProtectedRoute>
       ),
       children: [
-        {
-          index: true,
-          element: <DashboardOverview1 />,
-        },
         {
           path: "/hero-section",
           element: <HeroSection />,
@@ -433,10 +414,9 @@ function Router() {
 
   return useRoutes(routes);
 }
-export default Router;
 
 export default Router;
 
 function PublicLayout() {
-  return <Outlet />
+  return <Outlet />;
 }

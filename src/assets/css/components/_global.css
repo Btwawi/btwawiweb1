@@ -1,6 +1,6 @@
 /* html {
   scroll-behavior: smooth;
-  background-color: white; /* Changed from theme("colors.primary") to white */
+  background-color: theme("colors.primary");
   &.dark {
     background-color: theme("colors.darkmode.800");
     body {
@@ -16,133 +16,133 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    padding: 0; /* Remove default padding to let hero image extend fully */
-    margin: 0;
-    font-family: theme("fontFamily.aeonik");
+    padding-top: theme("spacing.3");
+    padding-left: theme("spacing.3");
+    padding-right: theme("spacing.3");
+    font-family: theme("fontFamily.roboto");
     font-size: theme("fontSize.sm");
     line-height: theme("lineHeight.5");
-    color: theme("colors.primary");
-    background-color: white;
+    color: theme("colors.slate.800");
+    @media screen(sm) {
+      padding-left: theme("spacing.8");
+      padding-right: theme("spacing.8");
+    }
   }
-
-}
+} */
 
 /* Aeonik Fonts */
 
 /* Air (ExtraLight) */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik Fonts/Aeonik-Air.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik Fonts/Aeonik-AirItalic.otf') format('opentype');
   font-weight: 200;
   font-style: italic;
-}
+} */
 
 /* Thin */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-Thin.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-ThinItalic.otf') format('opentype');
   font-weight: 100;
   font-style: italic;
-}
+} */
 
 /* Light */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-LightItalic.otf') format('opentype');
   font-weight: 300;
   font-style: italic;
-}
+} */
 
 /* Regular */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-RegularItalic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
-}
+} */
 
 /* Medium */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-MediumItalic.otf') format('opentype');
   font-weight: 500;
   font-style: italic;
-}
+} */
 
 /* Bold */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-BoldItalic.otf') format('opentype');
   font-weight: 700;
   font-style: italic;
-}
+} */
 
 /* Black */
-@font-face {
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-Black.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'Aeonik';
   src: url('/fonts/Aeonik/Aeonik-BlackItalic.otf') format('opentype');
   font-weight: 900;
   font-style: italic;
-}
+} */
 
-@keyframes scroll {
+/* @keyframes scroll {
   0% {
     transform: translateX(0);
   }
   100% {
     transform: translateX(-50%);
   }
-}
-
-.animate-scroll {
-  animation: scroll 30s linear infinite;
-}
-
-.animate-scroll:hover {
-  animation-play-state: paused;
-}
-
 } */
 
+/* .animate-scroll {
+  animation: scroll 30s linear infinite;
+} */
+
+/* .animate-scroll:hover {
+  animation-play-state: paused;
+} */
