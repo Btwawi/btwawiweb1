@@ -202,12 +202,12 @@ const LandingPage = () => {
             />
           </div>
 
-              <div className="absolute inset-0 bg-black/40 rounded-lg -z-10"></div>
+          <div className="absolute inset-0 bg-black/40 rounded-lg -z-10"></div>
           {/* Hero Content now above overlay */}
           <div className="absolute bottom-0 left-0 right-0 z-20 w-full pb-8 lg:pb-0">
             <div className="px-4 lg:container flex flex-col md:flex-row justify-between gap-8 lg:gap-12 relative z-20">
               {/* Dark overlay for better text readability */}
-              
+
               {/* First div - Conference Title */}
               <div className="flex items-center justify-center md:justify-start w-full md:w-1/2">
                 <div className="mb-6 md:mb-10 flex flex-col items-center md:items-start justify-center">
@@ -231,7 +231,8 @@ const LandingPage = () => {
                     Wealth
                   </h2>
                   <p className="text-xl sm:text-xl lg:text-3xl text-white md:text-white leading-relaxed text-center md:text-left">
-                    Islamic Approach to Earning, <br className="hidden md:block" /> Preserving & Passing
+                    Islamic Approach to Earning,{" "}
+                    <br className="hidden md:block" /> Preserving & Passing
                     Wealth
                   </p>
                 </div>
@@ -260,7 +261,7 @@ const LandingPage = () => {
       <div className="md:container px-4 bg-lightYellowBase">
         <div className="flex justify-evenly max-w-7xl mx-auto py-7">
           <img src="/images/svg/btwawi-icon.svg" alt="BTWAWI ICON" />
-          <p className="text-[31.82px] px-4 font-light">
+          <p className="text-sm md:text-[31.82px]  px-4 font-light">
             Lagos - Sunday,{" "}
             <span className="text-prussianBlue font-bold">
               23rd November, 2025
@@ -273,10 +274,9 @@ const LandingPage = () => {
           <img src="/images/svg/btwawi-icon.svg" alt="BTWAWI ICON" />
         </div>
       </div>
-      <section className=" bg-lightYellowBase"></section>
 
       {/* Conference Hall Image and Content Section */}
-      <section className="bg-white md:container px-4 my-10 py-10 max-w-7xl mx-auto">
+      <section className="bg-white md:container px-4 my-5 md:my-10 py-5 md:py-10 max-w-7xl mx-auto">
         <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] overflow-hidden">
           <img
             src="/images/png/conference-hall-1.jpg"
@@ -326,10 +326,10 @@ const LandingPage = () => {
       </section>
 
       {/* Milestones Section */}
-      <section className="md:container px-4 bg-white max-w-7xl mx-auto my-10 py-10 ">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+      <section className="md:container px-4 bg-white max-w-7xl mx-auto my-5 md:my-10 py-5 md:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left side - Image */}
-          <div className="h-full">
+          <div className="h-auto lg:h-full">
             <img
               src="/images/png/milestones-image.png"
               alt="Milestones"
@@ -339,41 +339,49 @@ const LandingPage = () => {
 
           {/* Right side - Milestones Content */}
           <div className="flex flex-col justify-center text-prussianBlue">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl px-8 font-bold text-prussianBlue mb-12 text-center lg:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl px-4 lg:px-8 font-bold text-prussianBlue mb-8 lg:mb-12 text-center lg:text-left">
               <span className="font-light italic">Milestones</span> Recorded in
               every Sense
             </h2>
 
             {/* Milestone Boxes Grid */}
-            <div className="grid grid-cols-2 w-[700px] h-[500px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 w-full lg:w-[700px] h-auto lg:h-[500px]">
               {/* Box 1 */}
-              <div className="bg-[#FFF6D6] flex flex-col items-center justify-center text-prussianBlue text-center">
-                <span className="font-bold text-[100px] leading-none">7k+</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFF6D6] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  7k+
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Registrations recorded
                 </span>
               </div>
 
               {/* Box 2 */}
-              <div className="bg-[#FFEEB7] flex flex-col items-center justify-center text-prussianBlue text-center">
-                <span className="font-bold text-[100px] leading-none">4k+</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFEEB7] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  4k+
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Physical attendees
                 </span>
               </div>
 
               {/* Box 3 */}
-              <div className="bg-[#FFE89D] flex flex-col items-center justify-center text-prussianBlue text-center">
-                <span className="font-bold text-[100px] leading-none">4M+</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFE89D] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  4M+
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Views across platforms
                 </span>
               </div>
 
               {/* Box 4 */}
-              <div className="bg-[#FFE07A] flex flex-col items-center justify-center text-prussianBlue text-center">
-                <span className="font-bold text-[100px] leading-none">40M</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFE07A] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  40M
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Recorded Sales
                 </span>
               </div>
@@ -465,7 +473,7 @@ const LandingPage = () => {
       </section>
 
       {/* Success Stories Section */}
-      <section className="md:container px-4 py-10 my-10 max-w-7xl mx-auto text-prussianBlue">
+      <section className="md:container px-2 my-2 md:my-10 py-3 md:py-10 max-w-7xl mx-auto text-prussianBlue">
         <div className="">
           {/* Headlines */}
           <div className="mb-16 text-prussianBlue font-aeonik">
@@ -594,7 +602,7 @@ const LandingPage = () => {
       </section>
 
       {/* Partners & Sponsors Section */}
-      <section className="md:container px-4 py-10 my-10 max-w-7xl mx-auto">
+      <section className="md:container px-4 my-2 md:my-10 py-1 md:py-10 max-w-7xl mx-auto">
         <div className="">
           {/* Headlines */}
           <div className="mb-16 text-prussianBlue font-aeonik">
@@ -637,7 +645,7 @@ const LandingPage = () => {
       </section>
 
       {/* Vendors Section */}
-      <section className="md:container px-4 py-10 my-10 max-w-7xl mx-auto bg-white">
+      <section className="md:container px-4 my-2 md:my-10 py-3 md:py-10 max-w-7xl mx-auto bg-white">
         <div className="">
           {/* Vendors Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 gap-6">
@@ -781,7 +789,7 @@ const LandingPage = () => {
       </section>
 
       {/* Support BTWAWI Section */}
-      <div className="md:container mx-auto px-4 my-10 py-10 ">
+      <div className="md:container mx-auto px-4 my-1 md:my-10 py-1 md:py-10 ">
         <div className=" bg-neutralBlue py-12 px-4 md:px-12 mt-4 md:mt-10 flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/2 text-prussianBlue text-center md:text-left">
             <h2 className="text-3xl md:text-5xl font-medium">Support BTWAWI</h2>
@@ -808,7 +816,7 @@ const LandingPage = () => {
       </div>
 
       {/* Partner With Purpose Section */}
-      <div className="md:container px-4 my-10 py-10 ">
+      <div className="md:container px-4 my-1 md:my-10 py-1 md:py-10 ">
         <div className="bg-lightPaleYellow mt-4 md:mt-8 py-8 lg:py-12 px-4 md:px-12 flex flex-col md:flex-row items-center gap-6 lg:gap-8">
           <div className="w-full md:w-1/2 flex justify-center order-2 md:order-1 ">
             <img
@@ -837,14 +845,14 @@ const LandingPage = () => {
       </div>
 
       {/* Recognize a business Section */}
-      <section className="md:container px-4 my-10 py-10">
+      <section className="md:container px-4 my-3 md:my-10 py-3 md:py-10">
         <div className="flex flex-col md:flex-row w-full bg-neutralBlue">
-          <div className="text-prussianBlue font-aeonik py-10 text-lg md:text-3xl w-full md:w-1/2 px-4 md:px-12 leading-11 flex flex-col gap-4 md:gap-8">
+          <div className="text-prussianBlue font-aeonik py-10 text-lg md:text-3xl w-full md:w-1/2 px-4 md:px-12 leading-11 flex flex-col gap-4 md:gap-8 items-center md:items-start text-center md:text-left">
             <h2 className="text-3xl md:text-5xl tracking-tighter font-medium">
               Recognize a Business
               <br /> That Inspires You
             </h2>
-            <p className="text-left">
+            <p>
               Know a brand or entrepreneur doing
               <br />
               business the way Allaah wants it with <br />
@@ -859,15 +867,19 @@ const LandingPage = () => {
               </Link>
             </div>
           </div>
-          <div className="px-4 flex justify-center md:px-12 w-full md:w-1/2 ">
-            <img src={recognitionBadge} alt="recognition badge" className="" />
+          <div className="px-4 flex justify-center items-center md:px-12 w-full md:w-1/2 py-6 md:py-0">
+            <img
+              src={recognitionBadge}
+              alt="recognition badge"
+              className="max-w-full"
+            />
           </div>
         </div>
       </section>
 
       {/* Apply for Grant Section */}
-      <section className="md:container px-4 my-10 py-10 max-w-7xl mx-auto ">
-        <div className="px-4 sm:px-6 lg:px-8 bg-[#FFF7DC] ">
+      <section className="md:container px-4 my-3 md:my-10 py-3 md:py-10 max-w-7xl mx-auto">
+        <div className="px-4 sm:px-6 lg:px-8 bg-[#FFF7DC]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-10">
             {/* Left Content - Image */}
             <div className="flex justify-center lg:justify-start">
@@ -881,11 +893,11 @@ const LandingPage = () => {
             </div>
 
             {/* Right Content - Text and CTA */}
-            <div className="text-left text-prussianBlue">
+            <div className="text-center lg:text-left text-prussianBlue">
               <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-prussianBlue font-aeonik">
                 Apply for the BTWAWI Business Grant
               </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-prussianBlue max-w-xl">
+              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-prussianBlue max-w-xl mx-auto lg:mx-0">
                 Are you running a business that aligns with Islamic values and
                 needs support to grow? We want to help.
               </p>
@@ -893,7 +905,7 @@ const LandingPage = () => {
               {/* Partner Button */}
               <Link
                 to={"/booking"}
-                className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold self-start hover:bg-prussianBlue hover:text-white transition"
+                className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold hover:bg-prussianBlue hover:text-white transition mx-auto lg:mx-0"
               >
                 Become a partner
                 <BsArrowRight />
@@ -904,39 +916,41 @@ const LandingPage = () => {
       </section>
 
       {/* Secure your booth Section */}
-      <section className="md:container px-4  my-10 py-10 ">
+      <section className="md:container px-4 my-3 md:my-10 py-3 md:py-10">
         <div className="px-4 sm:px-6 py-6 lg:px-8 bg-[#F2F8FF]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content - Text and CTA */}
-            <div className="flex flex-col text-prussianBlue">
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-prussianBlue font-aeonik">
-                Secure your booth at BTWAWI Conference
-              </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-prussianBlue max-w-xl">
-                Enjoy exclusive benefits, early access to event information, and
-                a streamlined check-in experience.
-              </p>
+        {/* Left Content - Text and CTA */}
+        <div className="flex flex-col text-prussianBlue text-center lg:text-left">
+          <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-prussianBlue font-aeonik">
+            Secure your booth at BTWAWI Conference
+          </h2>
+          <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-prussianBlue max-w-xl mx-auto lg:mx-0">
+            Enjoy exclusive benefits, early access to event information, and
+            a streamlined check-in experience.
+          </p>
 
-              {/* CTA - Modified to have inline-flex instead of flex to not have full width */}
-              <Link
-                to={"/booth-registration"}
-                className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold self-start hover:bg-prussianBlue hover:text-white transition"
-              >
-                Secure yours
-                <BsArrowRight />
-              </Link>
-            </div>
+          {/* CTA - Centered on mobile, aligned left on desktop */}
+          <div className="flex justify-center lg:justify-start">
+            <Link
+          to={"/booth-registration"}
+          className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold hover:bg-prussianBlue hover:text-white transition"
+            >
+          Secure yours
+          <BsArrowRight />
+            </Link>
+          </div>
+        </div>
 
-            {/* Right Content - Image */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-lg">
-                <img
-                  src="/images/jpg/booth-image.png"
-                  alt="Support BTWAWI"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
+        {/* Right Content - Image */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-lg">
+            <img
+          src="/images/jpg/booth-image.png"
+          alt="Support BTWAWI"
+          className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
           </div>
         </div>
       </section>
