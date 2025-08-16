@@ -5,6 +5,8 @@ import { WhyAttendSection } from "../assets/css/components/WhyAttendSection";
 import { SpeakersSection } from "../assets/css/components/SpeakersSection";
 import { RegistrationCTA } from "../assets/css/components/RegistrationCTA";
 import { SupportPartnerSections } from "../assets/css/components/SupportPartnerSections";
+import Header from "../components/Layout/Header";
+import Footer from "../components/Layout/Footer";
 
 const abujaData = {
   hero: {
@@ -78,13 +80,15 @@ const abujaData = {
 
 export default function Abuja() {
   return (
-    <div className="pt-[141px]">
+    <div className="">
+      <Header />
       <HeroSection data={abujaData.hero} />
       <StatsSection data={abujaData.stats} />
       <WhyAttendSection data={abujaData.whyAttend} />
       <SpeakersSection data={abujaData.speakers} />
       <RegistrationCTA />
       <SupportPartnerSections />
+      <Footer />
     </div>
   );
 }

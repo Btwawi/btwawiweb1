@@ -2,11 +2,16 @@ import btwawiLogo from "../../assets/images/btwawi-logo.png";
 import { RiWhatsappFill } from "react-icons/ri";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
 const Header = () => {
   return (
-    <header className="w-full bg-white/20">
-      <div className="md:container  px-4 py-3 mt-4 mb-10 flex justify-between items-center">
+    <header className="w-full bg-white/20 pt-2 pb-7 before:content-[''] before:absolute before:inset-0 before:bg-fixed before:bg-no-repeat before:bg-skew-pattern dark:before:bg-skew-pattern-dark">
+      <div
+        className={clsx([
+          "md:container  px-4 py-3 mt-4 mb-10 flex justify-between items-center",
+        ])}
+      >
         {/* Logo */}
         <div className="flex items-center">
           <img

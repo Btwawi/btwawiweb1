@@ -17,7 +17,7 @@ export function HeroSection({ data }: HeroSectionProps) {
   const [cityName, version] = data.label.split(" ");
 
   return (
-    <section className="relative h-[100vh] min-h-[800px] w-full overflow-hidden">
+    <section className="relative h-[100vh] min-h-[800px] w-full overflow-hidden ">
       {/* Background Image */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center"
