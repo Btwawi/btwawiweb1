@@ -19,6 +19,11 @@ export default function AbujaPage() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [visibleCards, setVisibleCards] = useState(4);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
 
   const speakers = [
     {
@@ -106,7 +111,7 @@ export default function AbujaPage() {
         className="h-[130vh] lg:h-[140vh] relative bg-cover bg-center text-prussianBlue mb-10 md:mb-40"
         style={{ backgroundImage: `url(${HeroBg})` }}
       >
-        <Header />
+        <Header onMenuToggle={handleMobileMenuToggle} />
         <div className="mt-8 lg:mt-16 flex flex-col gap-6 items-center text-center">
           <p className="font-semibold text-xl lg:text-3xl capitalize tracking-widest">
             ABUJA <span className="italic font-light ">2.0</span>
@@ -186,7 +191,9 @@ export default function AbujaPage() {
               href="#"
               className="mt-6 inline-flex items-center gap-2 py-4 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Read more <BsArrowRight size={20} />
+              Read more
+              {/* @ts-ignore */}
+              <BsArrowRight size={20} />
             </a>
           </div>
         </div>
@@ -270,7 +277,9 @@ export default function AbujaPage() {
               to={"/booking"}
               className="inline-flex items-center text-lg tracking-tighter gap-2 py-5 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Book your seat <BsArrowRight size={20} />
+              Book your seat
+              {/* @ts-ignore */}
+              <BsArrowRight size={20} />
             </Link>
           </div>
         </div>
@@ -291,7 +300,9 @@ export default function AbujaPage() {
               href="#"
               className="mt-6 inline-flex items-center gap-2 py-4 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Donate now <BsArrowRight size={20} />
+              Donate now
+              {/* @ts-ignore */}
+              <BsArrowRight size={20} />
             </a>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
@@ -326,7 +337,9 @@ export default function AbujaPage() {
               to="/booth-registration"
               className="mt-6 inline-flex items-center gap-2 py-5 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Become a partner <BsArrowRight size={20} />
+              Become a partner
+              {/* @ts-ignore */}
+              <BsArrowRight size={20} />
             </Link>
           </div>
         </div>

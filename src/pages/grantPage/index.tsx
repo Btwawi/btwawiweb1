@@ -45,6 +45,12 @@ const GrantPage = () => {
     "CAC, Utility bill, SCUML, and other certifications"
   );
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
+
   interface FileChangeEvent extends React.ChangeEvent<HTMLInputElement> {
     target: HTMLInputElement & {
       files: FileList | null;
@@ -71,7 +77,6 @@ const GrantPage = () => {
   };
 
   const onSubmit: SubmitHandler<GrantFormData> = async (data) => {
-    
     console.log(data);
     try {
       const response = await axios.post(
@@ -100,7 +105,7 @@ const GrantPage = () => {
 
   return (
     <>
-      <Header />
+      <Header onMenuToggle={handleMobileMenuToggle} />
       <div className="md:container mt-4 md:mt-10 px-4 mb-0 md:mb-12">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">

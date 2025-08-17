@@ -68,6 +68,8 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="close"
             type="button"
           >
+            {/* @ts-ignore */}
+
             <RiCloseCircleFill size={24} />
           </button>
         </div>
@@ -95,6 +97,8 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our Facebook page"
             className="rounded-full p-2 bg-light-yellow-base text-white hover:-translate-y-1 transition-transform"
           >
+            {/* @ts-ignore */}
+
             <CgFacebook size={26} />
           </a>
 
@@ -105,6 +109,8 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our Instagram page"
             className="rounded-full p-2 bg-light-yellow-base text-white hover:-translate-y-1 transition-transform"
           >
+            {/* @ts-ignore */}
+
             <BsInstagram size={26} />
           </a>
 
@@ -115,6 +121,8 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our LinkedIn page"
             className="rounded-full p-2 bg-light-yellow-base text-white hover:-translate-y-1 transition-transform"
           >
+            {/* @ts-ignore */}
+
             <RiLinkedinFill size={26} />
           </a>
 
@@ -125,6 +133,8 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our X page"
             className="rounded-full p-2 bg-light-yellow-base text-white hover:-translate-y-1 transition-transform"
           >
+            {/* @ts-ignore */}
+
             <RiTwitterXFill size={26} />
           </a>
           <a
@@ -134,8 +144,10 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Chat us up on WhatsApp"
             className="text-sm font-extrabold font-aeonik flex items-center gap-2 p-[18px] md:p-6 rounded-full border border-prussianBlue hover:translate-x-1 transition-transform duration-200"
           >
+            {/* @ts-ignore */}
             <RiWhatsappFill size={20} className="text-primaryGreen" />
             Chat with us
+            {/* @ts-ignore */}
             <BsArrowRight size={20} />
           </a>
         </div>

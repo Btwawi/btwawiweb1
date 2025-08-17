@@ -1,74 +1,113 @@
 import { useState, useRef, useEffect } from "react";
-
+import Header from "../../components/Layout/Header";
+import HeroBg from "../../assets/images/hero-bg.jpg";
+import { BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import Lucide from "../../base-components/Lucide";
+import partners from "../../assets/images/partners.png";
+import recognitionBadge from "../../assets/images/merit.png";
+import LoveMoney from "../../assets/images/love-money.png";
+import JJC from "../../assets/images/JJC.png";
+import btwawiLogo from "../../assets/images/btwawi-log-single.png";
+import Olakunle from "../../assets/images/Olakunle.png";
+import Oshodi from "../../assets/images/Oshodi.png";
+import Ridwan from "../../assets/images/Ridwan.png";
+import Tope from "../../assets/images/Tope.png";
+import Footer from "../../components/Layout/Footer";
 
 const LandingPage = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoSlideRef = useRef<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [visibleCards, setVisibleCards] = useState(4);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const speakersData = [
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
+
+  const speakers = [
     {
-      id: 1,
-      name: "Abdulrasheed Bello (JJC Skillz)",
-      role: "Islamic Finance Expert",
-      image: "/images/png/speaker-jjc.png",
-    },
-    {
-      id: 2,
-      name: "Ridwan Sanusi",
-      role: "Founder & CEO, Halvest",
-      image: "/images/png/speaker-ridwan.png",
-    },
-    {
-      id: 3,
-      name: "Basheer Oshodi",
-      role: "Chief Executive, Trust Arthur",
-      image: "/images/png/speaker-basheer.png",
-    },
-    {
-      id: 4,
-      name: "Tope Salahudeen",
-      role: "Halal Investment Analyst,CEO, Helpa.me",
-      image: "/images/png/speaker-tope.png",
-    },
-    {
-      id: 5,
       name: "Abdul-Rahman Olakunle",
-      role: "Author, Writer & Life Coach",
-      image: "/images/png/speaker-olakunle.png",
+      title: "Author, Writer & Life Coach",
+      image: Olakunle,
     },
     {
-      id: 6,
-      name: "Abdulrasheed Bello (JJC Skillz)",
-      role: "Islamic Finance Expert",
-      image: "/images/png/speaker-jjc.png",
+      name: "JJC Skillz",
+      title: "Entrepreneur & Founder of Tribe Nation",
+      image: JJC,
     },
     {
-      id: 7,
-      name: "Ridwan Sanusi",
-      role: "Founder & CEO, Halvest",
-      image: "/images/png/speaker-ridwan.png",
-    },
-    {
-      id: 8,
-      name: "Basheer Oshodi",
-      role: "Chief Executive, Trust Arthur",
-      image: "/images/png/speaker-basheer.png",
-    },
-    {
-      id: 9,
       name: "Tope Salahudeen",
-      role: "Halal Investment Analyst,CEO, Helpa.me",
-      image: "/images/png/speaker-tope.png",
+      title: "Halal Investment Analyst, CEO, Helpa.me",
+      image: Tope,
     },
     {
-      id: 10,
-      name: "Abdul-Rahman Olakunle",
-      role: "Author, Writer & Life Coach",
-      image: "/images/png/speaker-olakunle.png",
+      name: "Ridwan Sanusi",
+      title: "Founder & CEO, Halvest",
+      image: Ridwan,
+    },
+    {
+      name: "Basheer Oshodi",
+      title: "Chief Executive, Trust Arthur",
+      image: Oshodi,
     },
   ];
+
+  const totalSlides = Math.ceil(speakers.length / visibleCards);
+
+  const maxIndex = Math.max(0, speakers.length - visibleCards);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 640;
+      const tablet = window.innerWidth < 768;
+
+      setIsMobile(mobile);
+
+      if (mobile) {
+        setVisibleCards(2);
+      } else if (tablet) {
+        setVisibleCards(3);
+      } else {
+        setVisibleCards(4);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => {
+        if (prev >= maxIndex) return 0;
+        return prev + 1;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, maxIndex]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(Math.min(Math.max(index, 0), maxIndex));
+  };
+
+  const getTransform = () => {
+    const cardWidthPercentage = 100 / visibleCards;
+    return `translateX(-${currentIndex * cardWidthPercentage}%)`;
+  };
+
+  const getCurrentSlideGroup = () => {
+    return Math.floor(currentIndex / visibleCards);
+  };
 
   const successStories = [
     {
@@ -152,165 +191,92 @@ const LandingPage = () => {
     };
   };
 
-  // Auto-slide functionality
-  useEffect(() => {
-    const startAutoSlide = () => {
-      autoSlideRef.current = setInterval(() => {
-        setActiveSlide((prev) => (prev + 1) % speakersData.length);
-      }, 4000); // Change slide every 4 seconds
-    };
-
-    startAutoSlide();
-
-    return () => {
-      if (autoSlideRef.current) {
-        clearInterval(autoSlideRef.current);
-      }
-    };
-  }, [speakersData.length]);
-
-  // Handle carousel scroll when activeSlide changes
-  useEffect(() => {
-    if (carouselRef.current) {
-      const cardWidth = 320 + 24; // card width + gap
-      carouselRef.current.scrollTo({
-        left: activeSlide * cardWidth,
-        behavior: "smooth",
-      });
-    }
-  }, [activeSlide]);
-
-  // Handle manual indicator click
-  const handleIndicatorClick = (index: number) => {
-    setActiveSlide(index);
-
-    // Reset auto-slide timer when user manually changes slide
-    if (autoSlideRef.current) {
-      clearInterval(autoSlideRef.current);
-    }
-
-    // Restart auto-slide after 6 seconds of inactivity
-    setTimeout(() => {
-      autoSlideRef.current = setInterval(() => {
-        setActiveSlide((prev) => (prev + 1) % speakersData.length);
-      }, 4000);
-    }, 6000);
-  };
-
-  // Pause auto-slide on hover
-  const handleCarouselMouseEnter = () => {
-    if (autoSlideRef.current) {
-      clearInterval(autoSlideRef.current);
-    }
-  };
-
-  // Resume auto-slide when mouse leaves
-  const handleCarouselMouseLeave = () => {
-    autoSlideRef.current = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % speakersData.length);
-    }, 4000);
-  };
-
-  const handleChatWithUs = () => {
-    const whatsappNumber = "+2348072589256"; // Replace with actual number
-    const message = "Hello! I'm interested in the conference.";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappUrl, "_blank");
-  };
-
   return (
-    <div className="min-h-screen">
-      {/* Hero Section with Background Image */}
-      {/* Hero Section with Background Image + Bottom Overlay */}
-      <section
-        className="relative min-h-screen bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/images/jpg/hero-bg.jpg')",
-        }}
+    <div className="overflow-x-hidden font-aeonik">
+      <div
+        className="min-h-screen lg:h-[135vh] relative bg-cover bg-center text-prussianBlue"
+        style={{ backgroundImage: `url(${HeroBg})` }}
       >
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/30"></div>
+        <Header onMenuToggle={handleMobileMenuToggle} />
+        <section className="md:container px-4">
+          <div className="hidden lg:block absolute bottom-0 left-0 w-full h-24 sm:h-1/2 md:h-1/2 lg:h-[43%] overflow-hidden z-10">
+            <img
+              src="/images/svg/hero-overlay.svg"
+              alt="Hero Overlay"
+              className="w-full h-auto min-h-full object-bottom pointer-events-none select-none"
+            />
+          </div>
 
-        {/* Bottom decorative overlay (fixed to bottom of hero section) */}
-        {/* <img
-          src="/images/png/hero-overlay.png"
-            alt="Hero Overlay"
-          className="absolute bottom-0 left-0 w-full pointer-events-none select-none z-10"
-        /> */}
-        {/* <div className="absolute bottom-0 left-0 w-full h-24 sm:h-32 md:h-40 lg:h-48 overflow-hidden z-10"> */}
-        <div className="hidden lg:block absolute bottom-0 left-0 w-full h-24 sm:h-1/2 md:h-1/2 lg:h-1/2 overflow-hidden z-10">
-          <img
-            src="/images/svg/hero-overlay.svg"
-            alt="Hero Overlay"
-            className="w-full h-auto min-h-full object-bottom pointer-events-none select-none"
-          />
-        </div>
-
-        {/* Hero Content now above overlay */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 flex items-start justify-between pb-10 w-full">
-          {/* <div className="absolute bottom-0 left-0 right-0 z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 md:pb-24 lg:pb-32"> */}
-          <div className="flex justify-between lg:grid-cols-2 gap-8 lg:gap-12 items-end max-w-7xl mx-auto">
-            {/* First div - Conference Title */}
-            <div className="text-center lg:text-left">
-              <div className="mb-4">
-                <h1 className="text-6xl sm:text-7xl lg:text-8xl text-secondary font-bold leading-none mb-2">
-                  BTWAWI
-                </h1>
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-none mb-2">
-                  CONFERENCE
-                </h2>
-                <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white italic leading-none">
-                  2025
-                </h3>
-              </div>
-            </div>
-
-            {/* Second div - Conference Description and Buttons */}
-            <div className="text-center lg:text-left">
-              <div className="mb-8">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
-                  The Cycle of Wealth
-                </h2>
-                <p className="text-xl sm:text-2xl lg:text-3xl text-gray-200 leading-relaxed">
-                  Islamic Approach to Earning, Preserving & Passing Wealth
-                </p>
+          <div className="absolute inset-0 bg-black/40 rounded-lg z-[-1]"></div>
+          <div className="absolute bottom-0 left-0 right-0 z-20 w-full pb-8 lg:pb-0">
+            <div className="px-4 lg:container flex flex-col md:flex-row justify-between gap-8 lg:gap-12 relative z-20">
+              <div className="flex items-center justify-center md:justify-start w-full md:w-1/2 mt-12 md:mt-0">
+                <div className=" mb-6 md:mb-10 flex flex-col items-center md:items-start justify-center">
+                  <h1 className="text-6xl sm:text-6xl lg:text-[160px] text-lightYellowBase font-bold tracking-tighter leading-none ">
+                    BTWAWI
+                  </h1>
+                  <h2 className="text-4xl sm:text-4xl lg:text-[100px] font-bold text-white md:text-white tracking-tighter leading-none ">
+                    CONFERENCE
+                  </h2>
+                  <h3 className="text-3xl sm:text-3xl lg:text-8xl font-light text-center md:text-left text-white md:text-white italic leading-none">
+                    2025
+                  </h3>
+                </div>
               </div>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button className="flex items-center w-full sm:w-auto bg-secondary font-semibold px-[64px] py-[24px] text-lg rounded-full">
-                  Book your seat
-                  <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-                </button>
-                <button className="flex items-center w-full sm:w-auto bg-white font-semibold px-[64px] py-[24px] text-lg rounded-full">
-                  Become a partner
-                  <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-                </button>
+              <div className="flex flex-col w-full md:w-1/2 px-0 md:px-4 mt-4 md:mt-20 items-center md:items-start">
+                <div className="flex flex-col gap-1 items-center md:items-start">
+                  <h2 className="text-3xl sm:text-3xl lg:text-5xl font-bold text-white md:text-white leading-tight mb-2 md:mb-4 text-center md:text-left">
+                    The <span className="font-light italic">Cycle</span> of
+                    Wealth
+                  </h2>
+                  <p className="text-xl sm:text-xl lg:text-3xl text-white md:text-white leading-relaxed text-center md:text-left">
+                    Islamic Approach to Earning,{" "}
+                    <br className="hidden md:block" /> Preserving & Passing
+                    Wealth
+                  </p>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6 w-full sm:w-auto">
+                  <Link
+                    to="/booking"
+                    className="inline-flex items-center justify-center gap-2 py-4 sm:py-5 px-8 sm:px-12 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition text-sm sm:text-base w-full sm:w-auto"
+                  >
+                    Book your seat
+                    {/* @ts-ignore */}
+                    <BsArrowRight size={18} />
+                  </Link>
+                  <Link
+                    to="/partner"
+                    className="inline-flex items-center justify-center gap-2 py-4 sm:py-5 px-8 sm:px-12 rounded-full bg-white text-prussianBlue font-semibold hover:bg-lightYellowBase hover:text-prussianBlue transition text-sm sm:text-base w-full sm:w-auto"
+                  >
+                    Become a partner <BsArrowRight size={18} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Days & Time section */}
-      <section className="py-10 bg-secondary">
-        {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex justify-evenly"> */}
-        <div className="flex justify-evenly max-w-7xl mx-auto">
+        </section>
+      </div>
+      <div className="w-full md:container px-4 bg-lightYellowBase">
+        <div className="flex justify-evenly mx-auto py-7">
           <img src="/images/svg/btwawi-icon.svg" alt="BTWAWI ICON" />
-          <p className="text-[31.82px] px-4 font-light">
+          <p className="text-sm md:text-[31.82px]  px-4 font-light">
             Lagos - Sunday,{" "}
-            <span className="text-primary font-bold">23rd November, 2025</span>{" "}
+            <span className="text-prussianBlue font-bold">
+              23rd November, 2025
+            </span>{" "}
             I Abuja - Saturday,{" "}
-            <span className="text-primary font-bold">29th November, 2025</span>
+            <span className="text-prussianBlue font-bold">
+              29th November, 2025
+            </span>
           </p>
           <img src="/images/svg/btwawi-icon.svg" alt="BTWAWI ICON" />
         </div>
-      </section>
+      </div>
 
-      {/* Conference Hall Image and Content Section */}
-      <section className="bg-white m-10 py-10 max-w-7xl mx-auto">
+      <section className="bg-white md:container px-4 my-5 md:my-10 py-5 md:py-10 max-w-7xl mx-auto">
         <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[400px] overflow-hidden">
           <img
             src="/images/png/conference-hall-1.jpg"
@@ -319,31 +285,35 @@ const LandingPage = () => {
           />
         </div>
 
-        {/* Content below image */}
         <div className="py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 justify-between gap-32 items-start">
             {/* First div - Title and Button */}
             <div className="space-y-6 max-w-xl">
-              <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-bold leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-prussianBlue leading-12">
                 <span className="font-bold">From a Vision to a Movement,</span>{" "}
-                <span className="font-light italic">The Journey of BTWAWI</span>
+                <span className="font-light italic">
+                  The <br />
+                  Journey of BTWAWI
+                </span>
               </h2>
-              <button className="inline-flex items-center bg-secondary text-primary text-[18px] font-bold px-[64px] py-[24px] rounded-full">
+              <button
+                type="button"
+                className="inline-flex items-center bg-lightYellowBase text-prussianBlue text-[18px] font-bold px-[64px] py-[24px] rounded-full"
+              >
                 Continue Reading
                 <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
               </button>
             </div>
 
-            {/* Second div - Description paragraphs */}
-            <div className="space-y-6 max-w-2xl">
-              <p className="text-lg leading-relaxed">
+            <div className="space-y-6 max-w-2xl text-lg md:text-2xl text-prussianBlue ">
+              <p className="leading-relaxed">
                 In 2022, we began a journey that redefines how Muslims view
                 business, one aligned with faith, ethics, and purpose. The first
                 edition of Business The Way Allaah Wants It (BTWAWI) welcomed
                 over 700 participants in Lagos, Nigeria and 2,000 online
                 attendees.
               </p>
-              <p className="text-lg leading-relaxed">
+              <p className="leading-relaxed">
                 It was a day filled with inspiring lectures, impactful
                 workshops, and practical sessions that opened the hearts of many
                 entrepreneurs to the beauty of Halal business practices.
@@ -353,11 +323,10 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Milestones Section */}
-      <section className="bg-white max-w-7xl mx-auto py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+      <section className="md:container px-4 bg-white max-w-7xl mx-auto my-5 md:my-10 py-5 md:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left side - Image */}
-          <div className="h-full">
+          <div className="h-auto lg:h-full">
             <img
               src="/images/png/milestones-image.png"
               alt="Milestones"
@@ -366,42 +335,50 @@ const LandingPage = () => {
           </div>
 
           {/* Right side - Milestones Content */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl px-8 font-bold text-primary mb-12 text-center lg:text-left">
+          <div className="flex flex-col justify-center text-prussianBlue">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl px-4 lg:px-8 font-bold text-prussianBlue mb-8 lg:mb-12 text-center lg:text-left">
               <span className="font-light italic">Milestones</span> Recorded in
               every Sense
             </h2>
 
             {/* Milestone Boxes Grid */}
-            <div className="grid grid-cols-2 w-[700px] h-[500px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 w-full lg:w-[700px] h-auto lg:h-[500px]">
               {/* Box 1 */}
-              <div className="bg-[#FFF6D6] flex flex-col items-center justify-center text-primary text-center">
-                <span className="font-bold text-[100px] leading-none">7k+</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFF6D6] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  7k+
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Registrations recorded
                 </span>
               </div>
 
               {/* Box 2 */}
-              <div className="bg-[#FFEEB7] flex flex-col items-center justify-center text-primary text-center">
-                <span className="font-bold text-[100px] leading-none">4k+</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFEEB7] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  4k+
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Physical attendees
                 </span>
               </div>
 
               {/* Box 3 */}
-              <div className="bg-[#FFE89D] flex flex-col items-center justify-center text-primary text-center">
-                <span className="font-bold text-[100px] leading-none">4M+</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFE89D] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  4M+
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Views across platforms
                 </span>
               </div>
 
               {/* Box 4 */}
-              <div className="bg-[#FFE07A] flex flex-col items-center justify-center text-primary text-center">
-                <span className="font-bold text-[100px] leading-none">40M</span>
-                <span className="text-[36px] leading-tight">
+              <div className="bg-[#FFE07A] flex flex-col items-center justify-center text-prussianBlue text-center p-8 lg:p-4">
+                <span className="font-bold text-6xl lg:text-[100px] leading-none">
+                  40M
+                </span>
+                <span className="text-xl lg:text-[36px] leading-tight">
                   Recorded Sales
                 </span>
               </div>
@@ -412,14 +389,14 @@ const LandingPage = () => {
 
       {/* Speakers Section */}
       <section
-        className="relative py-16 bg-cover bg-center bg-no-repeat"
+        className="md:container px-4 relative py-16 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
             "url('/images/png/speakers-carousel-background.png')",
         }}
       >
-        {/* Primary color overlay */}
-        <div className="absolute inset-0 bg-primary/80"></div>
+        {/* prussianBlue color overlay */}
+        <div className="absolute inset-0 bg-prussianBlue/80"></div>
 
         {/* Content */}
         <div className="relative z-10 ">
@@ -435,70 +412,68 @@ const LandingPage = () => {
           </div>
 
           {/* Speakers Carousel */}
-          <div className="relative max-w-7xl mx-auto">
+          <div className="relative overflow-hidden text-prussianBlue p-2 mt-8">
+            {/* Slider container */}
             <div
-              ref={carouselRef}
-              onMouseEnter={handleCarouselMouseEnter}
-              onMouseLeave={handleCarouselMouseLeave}
-              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hidden gap-6 pb-8"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: getTransform() }}
             >
-              {/* Mock speakers data */}
-              {speakersData.map((speaker) => (
+              {speakers.map((speaker, index) => (
                 <div
-                  key={speaker.id}
-                  className="flex-none snap-center w-80 bg-secondary overflow-hidden shadow-lg flex flex-col"
+                  key={index}
+                  className="flex-shrink-0"
+                  style={{ width: `${100 / visibleCards}%` }}
                 >
-                  {/* Speaker Image */}
-                  <div className="h-80 overflow-hidden bg-white flex-shrink-0">
-                    <img
-                      src={speaker.image}
-                      alt={speaker.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Speaker Info */}
-                  <div className="bg-secondary p-6 text-center flex flex-grow flex-col ">
-                    <h3 className="text-xl font-bold text-primary mb-2">
-                      {speaker.name}
-                    </h3>
-                    <p className="text-primary text-lg">{speaker.role}</p>
+                  <div className="flex flex-col items-center px-2">
+                    <div className="bg-neutralBlue w-full flex justify-center">
+                      <img
+                        src={speaker.image}
+                        alt={speaker.name}
+                        className="w-full aspect-square object-cover"
+                      />
+                    </div>
+                    {/* Card footer */}
+                    <div className="w-full flex flex-col items-center bg-lightYellowBase py-8 max-h-[120px] min-h-[120px]">
+                      <h3 className="text-base sm:text-lg md:text-2xl font-medium">
+                        {speaker.name}
+                      </h3>
+                      <p className="text-center text-xs sm:text-sm px-1">
+                        {speaker.title}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Carousel Indicators */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: speakersData.length }, (_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                    index === activeSlide ? "bg-secondary" : "bg-white/30"
-                  }`}
-                  // onClick={() => {
-                  //   const carousel =
-                  //     document.querySelector(".speakers-carousel");
-                  //   const cardWidth = 320 + 24; // card width + gap
-                  //   carousel?.scrollTo({
-                  //     left: index * cardWidth,
-                  //     behavior: "smooth",
-                  //   });
-                  // }}
-                  onClick={() => handleIndicatorClick(index)}
-                />
-              ))}
+            {/* Navigation dots */}
+            <div className="flex justify-center items-center mt-8 gap-3">
+              {Array.from({ length: totalSlides }).map((_, index) => {
+                const isActive = index === getCurrentSlideGroup();
+                return (
+                  <button
+                    type="button"
+                    key={index}
+                    onClick={() => goToSlide(index * visibleCards)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      isActive
+                        ? "bg-lightYellowBase scale-125"
+                        : "bg-prussianBlue"
+                    }`}
+                    title={`Go to slide ${index + 1}`}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Success Stories Section */}
-      <section className="py-16 my-16 max-w-7xl mx-auto">
+      <section className="md:container px-2 my-2 md:my-10 py-3 md:py-10 max-w-7xl mx-auto text-prussianBlue">
         <div className="">
           {/* Headlines */}
-          <div className="mb-16 text-primary font-aeonik">
+          <div className="mb-16 text-prussianBlue font-aeonik">
             <h2 className="text-4xl sm:text-5xl lg:text-[45px] font-medium leading-tight tracking-tight mb-4">
               Attendees{" "}
               <span className="italic font-light">Success Stories</span>
@@ -541,7 +516,7 @@ const LandingPage = () => {
 
                 {/* Name */}
                 <p className="text-2xl font-normal text-[#002D62] flex items-center gap-4">
-                  <div className="w-3 h-3 rounded-full bg-primary" />
+                  <div className="w-3 h-3 rounded-full bg-prussianBlue" />
                   {successStories[0].name}
                 </p>
               </div>
@@ -575,7 +550,7 @@ const LandingPage = () => {
 
                 {/* Name */}
                 <p className="text-2xl font-normal text-[#002D62] flex items-center gap-4">
-                  <div className="w-3 h-3 rounded-full bg-primary" />
+                  <div className="w-3 h-3 rounded-full bg-prussianBlue" />
                   {successStories[1].name}
                 </p>
               </div>
@@ -613,7 +588,7 @@ const LandingPage = () => {
 
                   {/* Name */}
                   <p className="text-2xl font-normal text-[#002D62] flex items-center gap-4">
-                    <div className="w-3 h-3 rounded-full bg-primary" />
+                    <div className="w-3 h-3 rounded-full bg-prussianBlue" />
                     {story.name}
                   </p>
                 </div>
@@ -624,10 +599,10 @@ const LandingPage = () => {
       </section>
 
       {/* Partners & Sponsors Section */}
-      <section className="py-16 my-16 max-w-7xl mx-auto">
+      <section className="md:container px-4 my-2 md:my-10 py-1 md:py-10 max-w-7xl mx-auto">
         <div className="">
           {/* Headlines */}
-          <div className="mb-16 text-primary font-aeonik">
+          <div className="mb-16 text-prussianBlue font-aeonik">
             <h2 className="text-4xl sm:text-5xl lg:text-[45px] font-medium leading-tight tracking-tight mb-4">
               Our Past{" "}
               <span className="italic font-light">Partners & Sponsors</span>
@@ -648,7 +623,7 @@ const LandingPage = () => {
                   key={index}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 flex-shrink-0"
+                  className="h-24 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 flex-shrink-0"
                 />
               ))}
 
@@ -667,14 +642,14 @@ const LandingPage = () => {
       </section>
 
       {/* Vendors Section */}
-      <section className="py-16 my-16 max-w-7xl mx-auto bg-white">
+      <section className="md:container px-4 my-2 md:my-10 py-3 md:py-10 max-w-7xl mx-auto bg-white">
         <div className="">
           {/* Vendors Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 gap-6">
             {/* First Row */}
             {/* Text Content Div */}
             <div className="p-8 flex flex-col text-left">
-              <h2 className="text-3xl sm:text-4xl lg:text-[45px] font-medium leading-tight tracking-tight mb-4 text-primary">
+              <h2 className="text-3xl sm:text-4xl lg:text-[45px] font-medium leading-tight tracking-tight mb-4 text-prussianBlue">
                 Cross-section of{" "}
                 <span className="italic font-light">Our Past Vendors</span>
               </h2>
@@ -734,12 +709,12 @@ const LandingPage = () => {
       </section>
 
       {/* Halal Articles Section */}
-      <section className="py-16 my-16 max-w-7xl mx-auto">
+      <section className="md:container px-4 py-10 my-10 max-w-7xl mx-auto text-prussianBlue">
         <div>
           {/* Header with Headlines and Button */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12 gap-6">
             {/* Headlines */}
-            <div className="text-primary font-aeonik">
+            <div className="text-prussianBlue font-aeonik">
               <h2 className="text-4xl sm:text-5xl lg:text-[45px] font-medium leading-tight tracking-tight mb-4">
                 Halal Articles carefully crafted
               </h2>
@@ -751,20 +726,20 @@ const LandingPage = () => {
 
             {/* Explore All Articles Button */}
             <div className="flex-shrink-0">
-              <button className="bg-secondary text-primary font-bold flex items-center px-9 py-6 rounded-full">
+              <Link
+                to={"/our-blog"}
+                className="bg-lightYellowBase text-prussianBlue font-bold flex gap-2 items-center px-9 py-6 rounded-full"
+              >
                 Explore all articles
-                <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-              </button>
+                <BsArrowRight size={20} />
+              </Link>
             </div>
           </div>
 
           {/* Articles Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {halalArticles.map((article) => (
-              <div
-                key={article.id}
-                className="bg-white overflow-hidden"
-              >
+              <div key={article.id} className="bg-white overflow-hidden">
                 {/* Article Image */}
                 <div className="h-48 overflow-hidden">
                   <img
@@ -777,12 +752,12 @@ const LandingPage = () => {
                 {/* Article Content */}
                 <div className="p-6 bg-[#FFF6E7]">
                   {/* Title */}
-                  <h3 className="text-2xl font-normal text-primary mb-3 leading-tight">
+                  <h3 className="text-2xl font-normal text-prussianBlue mb-3 leading-tight">
                     {article.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[#636363] text-base leading-relaxed mb-6">
+                  <p className="text-[#636363] text-base leading-relaxed mb-6 line-clamp-3">
                     {article.description}
                   </p>
 
@@ -794,10 +769,14 @@ const LandingPage = () => {
                     </span>
 
                     {/* Read More Button */}
-                    <button className="flex items-center px-4 py-2 text-[10px] font-bold border border-primary text-primary rounded-full">
+                    <Link
+                      to={"/our-blog"}
+                      type="button"
+                      className="flex items-center gap-2 px-5 py-3 text-[12px] font-bold border border-prussianBlue text-prussianBlue rounded-full"
+                    >
                       Read more
-                      <Lucide icon="ArrowRight" className="w-4 h-4 ml-2" />
-                    </button>
+                      <BsArrowRight size={20} />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -807,115 +786,98 @@ const LandingPage = () => {
       </section>
 
       {/* Support BTWAWI Section */}
-      <section className="max-w-7xl mx-auto py-16 my-16 bg-[#F2F8FF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content - Text and CTA */}
-            <div className="text-left">
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-primary font-aeonik">
-                Support BTWAWI
-              </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-primary max-w-xl">
-                Your contribution helps us expand our reach and deliver an
-                exceptional experience for all attendees. Discover how you can
-                make a difference.
-              </p>
-
-              {/* Support Button */}
-              <button className="bg-secondary text-primary font-bold flex items-center px-9 py-6 text-[18px] rounded-full hover:bg-secondary/90 transition-colors">
-                Support us
-                <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-              </button>
-            </div>
-
-            {/* Right Content - Image */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-lg">
-                <img
-                  src="/images/jpg/support-image.png"
-                  alt="Support BTWAWI"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
+      <div className="md:container mx-auto px-4 my-1 md:my-10 py-1 md:py-10 ">
+        <div className=" bg-neutralBlue py-12 px-4 md:px-12 mt-4 md:mt-10 flex flex-col md:flex-row items-center gap-8">
+          <div className="w-full md:w-1/2 text-prussianBlue text-center md:text-left">
+            <h2 className="text-3xl md:text-5xl font-medium">Support BTWAWI</h2>
+            <p className="mt-4 text-lg md:text-2xl leading-relaxed">
+              Your contribution helps us expand our reach <br /> and deliver an
+              exceptional experience for all <br /> attendees. Discover how you
+              can make a <br /> difference.
+            </p>
+            <a
+              href="#"
+              className="mt-6 inline-flex items-center gap-2 px-9 py-6 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
+            >
+              Support us <BsArrowRight size={20} />
+            </a>
+          </div>
+          <div className="w-full md:w-1/2 flex justify-center">
+            <img
+              src={LoveMoney}
+              alt="Love and money"
+              className="w-full max-w-md"
+            />
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Partner With Purpose Section */}
-      <section className="py-16 my-16 bg-[#FFF7DC] max-w-7xl mx-auto">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content - Image */}
-            <div className="flex justify-center lg:justify-start">
-              <div className="w-full max-w-lg bg-primary">
-                <img
-                  src="/images/jpg/partner-image.png"
-                  alt="Partner With Purpose"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Right Content - Text and CTA */}
-            <div className="text-left">
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-primary font-aeonik">
-                Partner With Purpose
-              </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-primary max-w-xl">
-                Partnering with Business The Way Allaah Wants It Initiative is
-                not just an act of goodwill, it is a smart business move.
-              </p>
-
-              {/* Partner Button */}
-              <button className="bg-secondary text-primary font-bold flex items-center px-9 py-6 text-[18px] rounded-full hover:bg-secondary/90 transition-colors">
-                Become a partner
-                <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-              </button>
-            </div>
+      <div className="md:container px-4 my-1 md:my-10 py-1 md:py-10 ">
+        <div className="bg-lightPaleYellow mt-4 md:mt-8 py-8 lg:py-12 px-4 md:px-12 flex flex-col md:flex-row items-center gap-6 lg:gap-8">
+          <div className="w-full md:w-1/2 flex justify-center order-2 md:order-1 ">
+            <img
+              src={partners}
+              alt="Handshake representing partnership"
+              className="w-full max-w-md bg-prussianBlue"
+            />
+          </div>
+          <div className="w-full md:w-1/2 text-prussianBlue space-y-4 lg:space-y-8 text-center md:text-left order-1 md:order-2">
+            <h2 className="text-3xl md:text-5xl tracking-tighter font-medium">
+              Partner With Purpose
+            </h2>
+            <p className="mt-4 text-lg md:text-2xl leading-relaxed">
+              Partnering with Business The Way Allaah <br /> Wants It Initiative
+              is not just an act of <br /> goodwill, it is a smart business
+              move.
+            </p>
+            <Link
+              to="/booth-registration"
+              className="mt-6 inline-flex items-center gap-2 px-9 py-6 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
+            >
+              Become a partner <BsArrowRight size={20} />
+            </Link>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Recognize a business Section */}
-      <section className="max-w-7xl mx-auto py-16 my-16 bg-[#F2F8FF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content - Text and CTA */}
-            <div className="text-left">
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-primary font-aeonik">
-                Recognize a Business That Inspires You
-              </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-primary max-w-xl">
-                Know a brand or entrepreneur doing business the way Allaah wants
-                it with honesty, integrity, and excellence?
-              </p>
-
-              {/* CTA */}
-              <button className="bg-secondary text-primary font-bold flex items-center px-9 py-6 text-[18px] rounded-full hover:bg-secondary/90 transition-colors">
-                Support us
-                <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-              </button>
+      <section className="md:container px-4 my-3 md:my-10 py-3 md:py-10">
+        <div className="flex flex-col md:flex-row w-full bg-neutralBlue">
+          <div className="text-prussianBlue font-aeonik py-10 text-lg md:text-3xl w-full md:w-1/2 px-4 md:px-12 leading-11 flex flex-col gap-4 md:gap-8 items-center md:items-start text-center md:text-left">
+            <h2 className="text-3xl md:text-5xl tracking-tighter font-medium">
+              Recognize a Business
+              <br /> That Inspires You
+            </h2>
+            <p>
+              Know a brand or entrepreneur doing
+              <br />
+              business the way Allaah wants it with <br />
+              honesty, integrity and excellence?
+            </p>
+            <div>
+              <Link
+                to="/recognize-a-business"
+                className="mt-6 inline-flex text-lg items-center gap-2 px-9 py-6 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
+              >
+                Support them <BsArrowRight size={20} />
+              </Link>
             </div>
-
-            {/* Right Content - Image */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-lg">
-                <img
-                  src="/images/jpg/recognize-image.png"
-                  alt="Support BTWAWI"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
+          </div>
+          <div className="px-4 flex justify-center items-center md:px-12 w-full md:w-1/2 py-6 md:py-0">
+            <img
+              src={recognitionBadge}
+              alt="recognition badge"
+              className="max-w-full"
+            />
           </div>
         </div>
       </section>
 
       {/* Apply for Grant Section */}
-      <section className="py-16 my-16 bg-[#FFF7DC] max-w-7xl mx-auto ">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="md:container px-4 my-3 md:my-10 py-3 md:py-10 max-w-7xl mx-auto">
+        <div className="px-4 sm:px-6 lg:px-8 bg-[#FFF7DC]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-10">
             {/* Left Content - Image */}
             <div className="flex justify-center lg:justify-start">
               <div className="w-full max-w-lg">
@@ -928,48 +890,56 @@ const LandingPage = () => {
             </div>
 
             {/* Right Content - Text and CTA */}
-            <div className="text-left">
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-primary font-aeonik">
+            <div className="text-center lg:text-left text-prussianBlue">
+              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-prussianBlue font-aeonik">
                 Apply for the BTWAWI Business Grant
               </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-primary max-w-xl">
+              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-prussianBlue max-w-xl mx-auto lg:mx-0">
                 Are you running a business that aligns with Islamic values and
                 needs support to grow? We want to help.
               </p>
 
               {/* Partner Button */}
-              <button className="bg-secondary text-primary font-bold flex items-center px-9 py-6 text-[18px] rounded-full hover:bg-secondary/90 transition-colors">
+              <Link
+                to={"/booking"}
+                className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold hover:bg-prussianBlue hover:text-white transition mx-auto lg:mx-0"
+              >
                 Become a partner
-                <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-              </button>
+                <BsArrowRight />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Secure your booth Section */}
-      <section className="max-w-7xl mx-auto py-16 my-16 bg-[#F2F8FF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="md:container px-4 my-3 md:my-10 py-3 md:py-10">
+        <div className="px-4 sm:px-6 py-6 lg:px-8 bg-[#F2F8FF]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content - Text and CTA */}
-            <div className="text-left">
-              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-primary font-aeonik">
+            <div className="flex flex-col text-prussianBlue text-center lg:text-left">
+              <h2 className="text-4xl sm:text-5xl lg:text-[48px] font-medium leading-tight tracking-tight mb-6 text-prussianBlue font-aeonik">
                 Secure your booth at BTWAWI Conference
               </h2>
-              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-primary max-w-xl">
+              <p className="text-xl sm:text-2xl font-normal leading-relaxed mb-8 text-prussianBlue max-w-xl mx-auto lg:mx-0">
                 Enjoy exclusive benefits, early access to event information, and
                 a streamlined check-in experience.
               </p>
 
-              {/* CTA */}
-              <button className="bg-secondary text-primary font-bold flex items-center px-9 py-6 text-[18px] rounded-full hover:bg-secondary/90 transition-colors">
-                Support us
-                <Lucide icon="ArrowRight" className="w-5 h-5 ml-2" />
-              </button>
+              {/* CTA - Centered on mobile, aligned left on desktop */}
+              <div className="flex justify-center lg:justify-start">
+                <Link
+                  to={"/booth-registration"}
+                  className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold hover:bg-prussianBlue hover:text-white transition"
+                >
+                  Secure yours
+                  <BsArrowRight />
+                </Link>
+              </div>
             </div>
 
             {/* Right Content - Image */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center">
               <div className="w-full max-w-lg">
                 <img
                   src="/images/jpg/booth-image.png"
@@ -981,6 +951,8 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

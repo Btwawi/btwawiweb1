@@ -75,7 +75,7 @@ import BookingPage from "../pages/bookingPage/index";
 import BoothRegisterationPage from "../pages/boothRegistration";
 import LagosPage from "../pages/LagosPage";
 import AbujaPage from "../pages/AbujaPage/index";
-import LandingPage from "../pages/landingPage";
+import LandingPage from "../pages/LandingPage/Landingpage";
 import Blog from "../pages/Blog";
 
 function Router() {
@@ -113,11 +113,11 @@ function Router() {
           element: <BookingPage />,
         },
         {
-          path: "/conference-lagos",
+          path: "/lagos",
           element: <LagosPage />,
         },
         {
-          path: "/conference-abuja",
+          path: "/abuja",
           element: <AbujaPage />,
         },
         {

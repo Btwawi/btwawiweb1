@@ -18,7 +18,12 @@ export default function LagosPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [visibleCards, setVisibleCards] = useState(4);
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
 
   const speakers = [
     {
@@ -62,7 +67,7 @@ export default function LagosPage() {
       if (mobile) {
         setVisibleCards(2);
       } else if (tablet) {
-        setVisibleCards(3)
+        setVisibleCards(3);
       } else {
         setVisibleCards(4);
       }
@@ -72,7 +77,7 @@ export default function LagosPage() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -89,16 +94,16 @@ export default function LagosPage() {
 
   const goToSlide = (index: number) => {
     setCurrentIndex(Math.min(Math.max(index, 0), maxIndex));
-  }
+  };
 
   const getTransform = () => {
     const cardWidthPercentage = 100 / visibleCards;
     return `translateX(-${currentIndex * cardWidthPercentage}%)`;
-  }
+  };
 
   const getCurrentSlideGroup = () => {
     return Math.floor(currentIndex / visibleCards);
-  }
+  };
 
   return (
     <div className="font-aeonik overflow-x-hidden">
@@ -106,7 +111,7 @@ export default function LagosPage() {
         className="h-[130vh] lg:h-[140vh] relative bg-cover bg-center text-prussianBlue mb-10 md:mb-40"
         style={{ backgroundImage: `url(${HeroBg})` }}
       >
-        <Header />
+        <Header onMenuToggle={handleMobileMenuToggle} />
         <div className="mt-8 lg:mt-16 flex flex-col gap-6 items-center text-center">
           <p className="font-semibold text-xl lg:text-3xl capitalize tracking-widest">
             LAGOS <span className="italic font-light ">4.0</span>

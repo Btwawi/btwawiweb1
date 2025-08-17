@@ -7,6 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { RiWhatsappFill } from "react-icons/ri";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import { useState } from "react";
 
 interface ContactData extends FieldValues {
   name: string;
@@ -21,6 +22,12 @@ const ContactUsPage = () => {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<ContactData>();
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -51,7 +58,7 @@ const ContactUsPage = () => {
 
   return (
     <>
-      <Header />
+      <Header onMenuToggle={handleMobileMenuToggle} />
       <div className="md:container mt-4 md:mt-10 px-4 mb-24">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">

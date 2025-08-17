@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HeroSection } from "../assets/css/components/HeroSection";
 import { StatsSection } from "../assets/css/components/StatsSection";
 import { WhyAttendSection } from "../assets/css/components/WhyAttendSection";
@@ -93,9 +93,14 @@ const lagosData = {
 };
 
 export default function Lagos() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
   return (
     <div>
-      <Header />
+      <Header onMenuToggle={handleMobileMenuToggle} />
       {/* @ts-ignore */}
       <HeroSection data={lagosData.hero} className="mt-[-241px] relative" />
       <StatsSection data={lagosData.stats} />

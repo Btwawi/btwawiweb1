@@ -30,6 +30,7 @@ const Footer = () => {
               title="Visit our Facebook page"
               className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
             >
+              {/* @ts-ignore */}
               <CgFacebook size={26} />
             </a>
 
@@ -40,6 +41,7 @@ const Footer = () => {
               title="Visit our Instagram page"
               className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
             >
+              {/* @ts-ignore */}
               <BsInstagram size={26} />
             </a>
 
@@ -50,6 +52,7 @@ const Footer = () => {
               title="Visit our LinkedIn page"
               className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
             >
+              {/* @ts-ignore */}
               <RiLinkedinFill size={26} />
             </a>
 
@@ -60,12 +63,13 @@ const Footer = () => {
               title="Visit our X page"
               className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
             >
+              {/* @ts-ignore */}
               <RiTwitterXFill size={26} />
             </a>
           </div>
         </div>
 
-        <div className="flex  md:w-2/4 md:gap-36 gap-16 mt-6  items-center justify-between font-aeonik">
+        <div className="flex px-3 md:px-0  md:w-2/4 md:gap-36 gap-12 mt-6  items-center justify-between font-aeonik">
           <ul className="flex flex-col items-center gap-2 md:text-lg text-lightGray">
             <li className="w-full">
               <h4 className="font-semibold text-left">Explore</h4>
@@ -156,10 +160,12 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 target="_blank"
                 title="Chat with us on WhatsApp"
-                className="text-sm font-extrabold font-aeonik flex items-center gap-2 p-[18px] md:p-6 rounded-full border border-prussianBlue"
+                className="w-full text-sm font-extrabold font-aeonik flex items-center gap-2 p-[18px] md:p-6 rounded-full border border-prussianBlue"
               >
+                {/* @ts-ignore */}
                 <RiWhatsappFill size={20} className="text-primaryGreen" />
                 Chat with us
+                {/* @ts-ignore */}
                 <BsArrowRight size={20} />
               </a>
             </li>

@@ -9,7 +9,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SuccessModal from "./component/SuccessModal";
 import { useSnackbar } from "notistack";
-import { RiInstagramFill, RiFacebookFill, RiTwitterXFill } from "react-icons/ri";
+import {
+  RiInstagramFill,
+  RiFacebookFill,
+  RiTwitterXFill,
+} from "react-icons/ri";
 
 interface BoothRegistrationFormData extends FieldValues {
   email: string;
@@ -43,7 +47,11 @@ const BoothRegistrationPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [descCount, setDescCount] = useState(0);
   const [requirementsCount, setRequirementsCount] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
   const countWords = (text: string) => {
     return text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
   };
@@ -58,13 +66,13 @@ const BoothRegistrationPage = () => {
 
   const onSubmit: SubmitHandler<BoothRegistrationFormData> = async (data) => {
     const transformedData = {
-    ...data,
-    socialMediaHandles: [
-      { platform: 'facebook', handle: data.socialMediaHandles.facebook },
-      { platform: 'instagram', handle: data.socialMediaHandles.instagram },
-      { platform: 'twitter', handle: data.socialMediaHandles.twitter },
-    ].filter(Boolean) // Remove empty entries
-  };
+      ...data,
+      socialMediaHandles: [
+        { platform: "facebook", handle: data.socialMediaHandles.facebook },
+        { platform: "instagram", handle: data.socialMediaHandles.instagram },
+        { platform: "twitter", handle: data.socialMediaHandles.twitter },
+      ].filter(Boolean), // Remove empty entries
+    };
     console.log(transformedData);
     try {
       const response = await axios.post(
@@ -93,7 +101,7 @@ const BoothRegistrationPage = () => {
 
   return (
     <>
-      <Header />
+      <Header onMenuToggle={handleMobileMenuToggle} />
       <div className="md:container mt-4 md:mt-10 px-4 mb-0 md:mb-12">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">

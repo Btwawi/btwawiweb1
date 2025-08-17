@@ -41,6 +41,11 @@ const BookingPage = () => {
   } = useForm<BookingFormData>();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = (isOpen: any) => {
+    setIsMobileMenuOpen(isOpen);
+  };
   // Watch form values for conditional rendering
   const watchPreviousAttendance = watch("previousAttendance");
   const watchHearAboutEvent = watch("hearAboutEvent");
@@ -86,7 +91,7 @@ const BookingPage = () => {
 
   return (
     <>
-      <Header />
+      <Header onMenuToggle={handleMobileMenuToggle} />
       <div className="md:container mt-4 md:mt-10 px-4 mb-6 md:mb-12">
         <div className="bg-neutralBlue font-aeonik flex flex-col text-prussianBlue items-center justify-center p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-medium text-center">
@@ -522,6 +527,8 @@ const BookingPage = () => {
                   {isSubmitting
                     ? "Submitting application"
                     : "Complete registration"}
+                  {/* @ts-ignore */}
+
                   <BsArrowRight size={20} />
                 </button>
               </div>
