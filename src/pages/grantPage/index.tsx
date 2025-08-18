@@ -578,7 +578,7 @@ const GrantPage = () => {
                   {isSubmitting
                     ? "Submitting application"
                     : "Submit application"}
-                  <BsArrowRight size={20} />
+                  &rarr;
                 </button>
               </div>
             </div>

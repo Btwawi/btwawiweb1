@@ -77,6 +77,7 @@ import LagosPage from "../pages/LagosPage";
 import AbujaPage from "../pages/AbujaPage/index";
 import LandingPage from "../pages/LandingPage/Landingpage";
 import Blog from "../pages/Blog";
+import Support from "../pages/Support";
 
 function Router() {
   const routes = [
@@ -123,6 +124,10 @@ function Router() {
         {
           path: "/our-blog",
           element: <Blog />,
+        },
+        {
+          path: "/donate",
+          element: <Support />,
         },
       ],
     },

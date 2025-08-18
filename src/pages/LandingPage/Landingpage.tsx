@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Header from "../../components/Layout/Header";
-import HeroBg from "../../assets/images/hero-bg.jpg";
+import HeroBg from "../../assets/images/hero-bg-min.jpg";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Lucide from "../../base-components/Lucide";
@@ -243,15 +243,15 @@ const LandingPage = () => {
                     to="/booking"
                     className="inline-flex items-center justify-center gap-2 py-4 sm:py-5 px-8 sm:px-12 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition text-sm sm:text-base w-full sm:w-auto"
                   >
-                    Book your seat
+                    Book your seat {"  "}
                     {/* @ts-ignore */}
-                    <BsArrowRight size={18} />
+                    &rarr;
                   </Link>
                   <Link
                     to="/partner"
                     className="inline-flex items-center justify-center gap-2 py-4 sm:py-5 px-8 sm:px-12 rounded-full bg-white text-prussianBlue font-semibold hover:bg-lightYellowBase hover:text-prussianBlue transition text-sm sm:text-base w-full sm:w-auto"
                   >
-                    Become a partner <BsArrowRight size={18} />
+                    Become a partner &rarr;
                   </Link>
                 </div>
               </div>
@@ -730,8 +730,7 @@ const LandingPage = () => {
                 to={"/our-blog"}
                 className="bg-lightYellowBase text-prussianBlue font-bold flex gap-2 items-center px-9 py-6 rounded-full"
               >
-                Explore all articles
-                <BsArrowRight size={20} />
+                Explore all articles {"  "} &rarr;
               </Link>
             </div>
           </div>
@@ -774,8 +773,7 @@ const LandingPage = () => {
                       type="button"
                       className="flex items-center gap-2 px-5 py-3 text-[12px] font-bold border border-prussianBlue text-prussianBlue rounded-full"
                     >
-                      Read more
-                      <BsArrowRight size={20} />
+                      Read more {"  "}&rarr;
                     </Link>
                   </div>
                 </div>
@@ -799,7 +797,7 @@ const LandingPage = () => {
               href="#"
               className="mt-6 inline-flex items-center gap-2 px-9 py-6 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Support us <BsArrowRight size={20} />
+              Support us {"  "} &rarr;
             </a>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
@@ -835,7 +833,7 @@ const LandingPage = () => {
               to="/booth-registration"
               className="mt-6 inline-flex items-center gap-2 px-9 py-6 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Become a partner <BsArrowRight size={20} />
+              Become a partner {"  "} &rarr;
             </Link>
           </div>
         </div>
@@ -860,7 +858,7 @@ const LandingPage = () => {
                 to="/recognize-a-business"
                 className="mt-6 inline-flex text-lg items-center gap-2 px-9 py-6 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
               >
-                Support them <BsArrowRight size={20} />
+                Support them {"  "}&rarr;
               </Link>
             </div>
           </div>
@@ -904,8 +902,7 @@ const LandingPage = () => {
                 to={"/booking"}
                 className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold hover:bg-prussianBlue hover:text-white transition mx-auto lg:mx-0"
               >
-                Become a partner
-                <BsArrowRight />
+                Become a partner &rarr;
               </Link>
             </div>
           </div>
@@ -933,7 +930,7 @@ const LandingPage = () => {
                   className="inline-flex items-center gap-2 px-9 py-6 text-[18px] rounded-full bg-lightYellowBase text-prussianBlue font-bold hover:bg-prussianBlue hover:text-white transition"
                 >
                   Secure yours
-                  <BsArrowRight />
+                  {"   "}&rarr;
                 </Link>
               </div>
             </div>

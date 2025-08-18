@@ -208,7 +208,7 @@ export default function LagosPage() {
               href="#"
               className="mt-6 inline-flex items-center gap-2 py-4 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Read more <BsArrowRight size={20} />
+              Read more &rarr;
             </a>
           </div>
         </div>
@@ -292,7 +292,7 @@ export default function LagosPage() {
               to={"/booking"}
               className="inline-flex items-center text-lg tracking-tighter gap-2 py-5 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Book your seat <BsArrowRight size={20} />
+              Book your seat &rarr;
             </Link>
           </div>
         </div>
@@ -313,7 +313,7 @@ export default function LagosPage() {
               href="#"
               className="mt-6 inline-flex items-center gap-2 py-4 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Donate now <BsArrowRight size={20} />
+              Donate now {"   "}&rarr;
             </a>
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
@@ -348,7 +348,7 @@ export default function LagosPage() {
               to="/booth-registration"
               className="mt-6 inline-flex items-center gap-2 py-5 px-8 rounded-full bg-lightYellowBase text-prussianBlue font-semibold hover:bg-prussianBlue hover:text-white transition"
             >
-              Become a partner <BsArrowRight size={20} />
+              Become a partner &rarr;
             </Link>
           </div>
         </div>

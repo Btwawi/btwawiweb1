@@ -24,7 +24,9 @@ const ContactUsPage = () => {
   } = useForm<ContactData>();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const handleChatClick = () => {
+    window.open("https://wa.me/2348121314177", "_blank");
+  };
   const handleMobileMenuToggle = (isOpen: any) => {
     setIsMobileMenuOpen(isOpen);
   };
@@ -158,20 +160,21 @@ const ContactUsPage = () => {
                   <div className="w-5 h-5 border-prussianBlue border-t-transparent rounded-full animate-spin"></div>
                 )}
                 {isSubmitting ? "Sending message" : "Send message"}
-                <BsArrowRight size={20} />
+                <p>&rarr;</p>
               </button>
 
-              <a
-                href="http://wa.me/2348121314177"
-                rel="noopener noreferrer"
-                title="Chat with us on WhatsApp"
-                target="_blank"
-                className="text-sm font-extrabold md:w-[300px] w-full font-aeonik text-prussianBlue flex items-center justify-center gap-2 py-4 md:py-8 px-10 rounded-full border border-prussianBlue hover:translate-x-1 transition-transform duration-200"
+              <button
+                onClick={handleChatClick}
+                className="flex items-center space-x-2 sm:space-x-3 hover:bg-[#002D62] hover:text-white text-[#002D62] px-4 sm:px-6 py-2 sm:py-3 border border-[#002D62] rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl text-sm sm:text-base"
               >
-                <RiWhatsappFill size={20} className="text-primaryGreen" />
-                Chat with us
-                <BsArrowRight size={20} />
-              </a>
+                <img
+                  src="/assets/whatsapp.svg"
+                  alt=""
+                  className="w-5 h-5 sm:w-6 sm:h-6"
+                />
+                <span className="font-bold">Chat with us</span>
+                <span className="text-lg sm:text-xl">&rarr;</span>
+              </button>
             </div>
           </form>
           <div className="px-4 flex justify-center md:px-12 py-12 w-full md:w-1/2 ">

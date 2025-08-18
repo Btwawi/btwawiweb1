@@ -14,6 +14,7 @@ import {
   RiFacebookFill,
   RiTwitterXFill,
 } from "react-icons/ri";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 
 interface BoothRegistrationFormData extends FieldValues {
   email: string;
@@ -283,7 +284,7 @@ const BoothRegistrationPage = () => {
                       {/* Facebook */}
                       <div className="flex items-center border border-lightBlue rounded-lg w-full">
                         <span className="px-2 text-lightGray100">
-                          <RiFacebookFill size={20} />
+                          <Facebook size={20} />
                         </span>
                         <input
                           id="facebook"
@@ -297,7 +298,7 @@ const BoothRegistrationPage = () => {
                       {/* Instagram */}
                       <div className="flex items-center border border-lightBlue rounded-lg w-full">
                         <span className="px-2 text-lightGray100">
-                          <RiInstagramFill size={20} />
+                          <Instagram size={20} />
                         </span>
                         <input
                           id="instagram"
@@ -311,7 +312,7 @@ const BoothRegistrationPage = () => {
                       {/* Twitter/X */}
                       <div className="flex items-center border border-lightBlue rounded-lg w-full">
                         <span className="px-2 text-lightGray100">
-                          <RiTwitterXFill size={20} />
+                          <Twitter size={20} />
                         </span>
                         <input
                           id="twitter"
@@ -568,10 +569,11 @@ const BoothRegistrationPage = () => {
                   {isSubmitting && (
                     <div className="w-5 h-5 border-prussianBlue border-t-transparent rounded-full animate-spin"></div>
                   )}
-                  {isSubmitting
-                    ? "Submitting application"
-                    : "Submit application"}
-                  <BsArrowRight size={20} />
+                  {isSubmitting ? (
+                    "Submitting application"
+                  ) : (
+                    <p>Submit application &rarr;</p>
+                  )}
                 </button>
               </div>
             </div>

@@ -10,6 +10,8 @@ import SuccessModalBg from "../../../assets/images/success-background.png";
 import SuccessCheck from "../../../assets/images/success.png";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { Twitter } from "lucide-react";
 
 interface SuccessModalProps {
   isOpen: boolean;
@@ -18,6 +20,10 @@ interface SuccessModalProps {
 
 export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
   const navigate = useNavigate();
+
+  const handleChatClick = () => {
+    window.open("https://wa.me/2348121314177", "_blank");
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -68,7 +74,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="close"
             type="button"
           >
-            <RiCloseCircleFill size={24} />
+            &#10005;
           </button>
         </div>
         <img
@@ -95,7 +101,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our Facebook page"
             className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
           >
-            <CgFacebook size={26} />
+            <Facebook size={26} />
           </a>
 
           <a
@@ -105,7 +111,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our Instagram page"
             className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
           >
-            <BsInstagram size={26} />
+            <Instagram size={26} />
           </a>
 
           <a
@@ -115,7 +121,7 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our LinkedIn page"
             className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
           >
-            <RiLinkedinFill size={26} />
+            <Linkedin size={26} />
           </a>
 
           <a
@@ -125,19 +131,20 @@ export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
             title="Visit our X page"
             className="rounded-full p-2 bg-lightYellowBase text-white hover:-translate-y-1 transition-transform"
           >
-            <RiTwitterXFill size={26} />
+            <Twitter size={26} />
           </a>
-          <a
-            href="http://wa.me/2348121314177"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Chat us up on WhatsApp"
-            className="text-sm font-extrabold font-aeonik flex items-center gap-2 p-[18px] md:p-6 rounded-full border border-prussianBlue hover:translate-x-1 transition-transform duration-200"
+          <button
+            onClick={handleChatClick}
+            className="flex items-center space-x-2 sm:space-x-3 hover:bg-[#002D62] hover:text-white text-[#002D62] px-4 sm:px-6 py-2 sm:py-3 border border-[#002D62] rounded-full transition-colors duration-200 shadow-lg hover:shadow-xl text-sm sm:text-base"
           >
-            <RiWhatsappFill size={20} className="text-primaryGreen" />
-            Chat with us
-            <BsArrowRight size={20} />
-          </a>
+            <img
+              src="/assets/whatsapp.svg"
+              alt=""
+              className="w-5 h-5 sm:w-6 sm:h-6"
+            />
+            <span className="font-bold">Chat with us</span>
+            <span className="text-lg sm:text-xl">&rarr;</span>
+          </button>
         </div>
       </div>
     </div>

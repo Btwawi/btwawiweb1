@@ -389,7 +389,7 @@ const RecognizeABusinessPage = () => {
                     <div className="w-5 h-5 border-prussianBlue border-t-transparent rounded-full animate-spin"></div>
                   )}
                   {isSubmitting ? "Submitting nomination" : "Submit nomination"}
-                  <BsArrowRight size={20} />
+                  &rarr;
                 </button>
               </div>
             </div>
