@@ -111,7 +111,9 @@ export default function AbujaPage() {
         className="h-[130vh] lg:h-[140vh] relative bg-cover bg-center text-prussianBlue mb-10 md:mb-40"
         style={{ backgroundImage: `url(${HeroBg})` }}
       >
-        <Header onMenuToggle={handleMobileMenuToggle} />
+        <Header
+          onMenuToggle={handleMobileMenuToggle}
+        />
         <div className="mt-8 lg:mt-16 flex flex-col gap-6 items-center text-center">
           <p className="font-semibold text-xl lg:text-3xl capitalize tracking-widest">
             ABUJA <span className="italic font-light ">2.0</span>
