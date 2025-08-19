@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SuccessModal from "./component/SuccessModal";
 import { useSnackbar } from "notistack";
+import { uploadToCloudinary } from "../../utils/cloudinary";
 
 interface GrantFormData extends FieldValues {
   ownerFullName: string;
@@ -24,7 +25,7 @@ interface GrantFormData extends FieldValues {
   businessShariahCompliance: string;
   howGrantWillBenefit: string;
   haveAttendedBtwawi: string;
-  supportingDocuments: string[];
+  supportingDocuments: string;
 }
 
 const GrantPage = () => {
@@ -37,6 +38,7 @@ const GrantPage = () => {
   } = useForm<GrantFormData>();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isuploading, setIsUploading] = useState(false);
   const [descCount, setDescCount] = useState(0);
   const [contribCount, setContribCount] = useState(0);
   const [shariahCount, setShariahCount] = useState(0);
@@ -44,7 +46,7 @@ const GrantPage = () => {
   const [fileName, setFileName] = useState(
     "CAC, Utility bill, SCUML, and other certifications"
   );
-
+  const [uploadedFileUrl, setUploadedFileUrl] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleMobileMenuToggle = (isOpen: any) => {
@@ -61,11 +63,45 @@ const GrantPage = () => {
     return text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
   };
 
-  const handleFileChange = (e: FileChangeEvent): void => {
+  const handleFileChange = async (e: FileChangeEvent): Promise<void> => {
     const file = e.target.files?.[0];
-    setFileName(
-      file ? file.name : "CAC, Utility bill, SCUML, and other certifications"
-    );
+    if (!file) {
+      setFileName("CAC, Utility bill, SCUML, and other certifications");
+      setUploadedFileUrl(null);
+      setValue("supportingDocuments", "");
+      return;
+    }
+
+    setFileName(file.name);
+    setIsUploading(true);
+
+    try {
+      const uploadedUrl = await uploadToCloudinary(file);
+      setUploadedFileUrl(uploadedUrl);
+      setValue("supportingDocuments", uploadedUrl, {
+        shouldValidate: true,
+        shouldDirty: true
+      });
+      enqueueSnackbar("File uploaded successfully!", { variant: "success" });
+    } catch (error: any) {
+      console.error("File upload failed:", error);
+      enqueueSnackbar(
+        error.message === "Cloudinary configuration is missing"
+          ? "Configuration error: Please contact support"
+          : "File upload failed. Please try again.",
+        { variant: "error" }
+      );
+      // Reset file input
+      setFileName("CAC, Utility bill, SCUML, and other certifications");
+      setUploadedFileUrl(null);
+      setValue("supportingDocuments", "", {
+        shouldValidate: true,
+        shouldDirty: true
+      });
+    } finally {
+      setIsUploading(false);
+    }
+    
   };
 
   const navigate = useNavigate();
@@ -93,6 +129,8 @@ const GrantPage = () => {
         enqueueSnackbar("Form submitted successfully!", { variant: "success" });
         reset();
         setIsModalOpen(true);
+        setFileName("CAC, Utility bill, SCUML, and other certifications");
+        setUploadedFileUrl(null)
         return response.data;
       } else {
         throw new Error(`Http Error: ${response.status}`);
@@ -387,7 +425,7 @@ const GrantPage = () => {
                         setDescCount(countWords(e.target.value));
                       }}
                       placeholder="Enter here"
-                      className="border h-51 text-primaryGray border-lightBlue p-3 placeholder-lightGray100 w-full rounded-lg"
+                      className="border h-44 text-primaryGray border-lightBlue p-3 placeholder-lightGray100 w-full rounded-lg"
                     ></textarea>
                     <span className="absolute bottom-2 right-3 text-xs text-gray-500">
                       {descCount}/250 words
@@ -535,24 +573,22 @@ const GrantPage = () => {
                         id="supportingDocuments"
                         type="file"
                         accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        className="absolute opacity-0 w-full h-full cursor-pointer"
+                      />
+                      <input
+                        type="hidden"
                         {...register("supportingDocuments", {
                           required: "Supporting document is required",
                           validate: {
-                            size: () => {
-                              const fileInput = document.getElementById(
-                                "supportingDocuments"
-                              ) as HTMLInputElement;
-                              const files = fileInput?.files;
-                              if (!files || files.length === 0) return true;
+                            hasFile: (value) => {
                               return (
-                                files[0].size <= 2 * 1024 * 1024 ||
-                                "File size must be less than 2MB"
+                                (value !== "" && value !== undefined) ||
+                                "Please upload a supporting document"
                               );
                             },
                           },
                         })}
-                        onChange={handleFileChange}
-                        className="absolute opacity-0 w-full h-full cursor-pointer"
                       />
                       <label
                         htmlFor="supportingDocuments"
@@ -560,6 +596,11 @@ const GrantPage = () => {
                       >
                         <span className="flex-1 truncate">{fileName}</span>
                       </label>
+                      {errors.supportingDocuments && (
+                        <p className="text-red-500 text-sm">
+                          {errors.supportingDocuments.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
