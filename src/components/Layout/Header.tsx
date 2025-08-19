@@ -5,13 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import clsx from "clsx";
 
-const Header = ({ onMenuToggle }: { onMenuToggle: any }) => {
+interface HeaderProps {
+  onMenuToggle?: (isOpen: boolean) => void;
+  chatLinkClassName?: string; // 👈 new prop for chat link
+}
+
+const Header = ({ onMenuToggle, chatLinkClassName }: HeaderProps) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    // Notify parent component about menu state change
     if (onMenuToggle) {
       onMenuToggle(!isMenuOpen);
     }
@@ -63,13 +67,13 @@ const Header = ({ onMenuToggle }: { onMenuToggle: any }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Chat with us on Whatsapp"
-                aria-label=""
-                className="text-sm hidden font-extrabold font-aeonik bg-white md:flex items-center gap-2 p-6 rounded-full hover:translate-x-1 transition-transform duration-200"
+                className={clsx(
+                  "text-sm hidden font-extrabold font-aeonik bg-white md:flex items-center gap-2 p-6 rounded-full hover:translate-x-1 transition-transform duration-200",
+                  chatLinkClassName // 👈 merge extra classes
+                )}
               >
-                {/* @ts-ignore */}
                 <RiWhatsappFill size={20} className="text-primaryGreen" />
                 Chat with us
-                {/* @ts-ignore */}
                 <BsArrowRight size={20} />
               </a>
             </li>
@@ -82,17 +86,11 @@ const Header = ({ onMenuToggle }: { onMenuToggle: any }) => {
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? (
-            //  @ts-ignore
-            <BsX size={32} />
-          ) : (
-            //  @ts-ignore
-            <BsList size={32} />
-          )}
+          {isMenuOpen ? <BsX size={32} /> : <BsList size={32} />}
         </button>
       </div>
 
-      {/* Mobile Navigation - now uses conditional rendering instead of max-height transitions */}
+      {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg border-t border-gray-100 animate-in slide-in-from-top-2 duration-300">
           <ul className="flex flex-col items-center space-y-4 font-wix text-lg text-prussianBlue py-6">
@@ -129,14 +127,14 @@ const Header = ({ onMenuToggle }: { onMenuToggle: any }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Chat with us on Whatsapp"
-                aria-label=""
-                className="text-sm font-extrabold font-aeonik bg-white flex items-center gap-2 px-6 py-3 rounded-full hover:translate-x-1 transition-transform duration-200"
+                className={clsx(
+                  "text-sm font-extrabold font-aeonik bg-white flex items-center gap-2 px-6 py-3 rounded-full hover:translate-x-1 transition-transform duration-200",
+                  chatLinkClassName 
+                )}
                 onClick={toggleMenu}
               >
-                {/* @ts-ignore */}
                 <RiWhatsappFill size={20} className="text-primaryGreen" />
                 Chat with us
-                {/* @ts-ignore */}
                 <BsArrowRight size={20} />
               </a>
             </li>
